@@ -799,34 +799,22 @@ function fecharModal() {
 }
 
 // ==========================================================
-// 6. CONTADOR DE ACESSOS ONLINE (ESTÁVEL) E DOWNLOAD DE IMAGEM
+// 6. CONTADOR DE ACESSOS GLOBAL (VIA COUNT.CO)
 // ==========================================================
 function contabilizarAcessoPlataforma() {
-    const namespaceProjeto = "gradehoraria_faculdade_2026";
-    
-    fetch(`https://api.scbctest.top/api/counter?name=${namespaceProjeto}&inc=1`)
-        .then(res => res.json())
+    // Este link é um contador público e estável
+    // O ID "grade-faculdade-milo" criará um contador único para o seu projeto
+    fetch("https://count.co/hit/grade-faculdade-milo/acessos-globais")
+        .then(response => response.json())
         .then(data => {
-            const acessos = data.count || data.value || 1;
-            document.getElementById('contador-global').innerText = acessos;
+            // O serviço retorna o valor atualizado no campo 'hits'
+            document.getElementById('contador-global').innerText = data.hits;
         })
-        .catch(err => {
-            console.warn("Servidor de contagem em manutenção. Ativando cache local.");
-            gerarContadorAlternativo();
+        .catch(error => {
+            console.error("Erro ao conectar no contador:", error);
+            // Se falhar, tentamos exibir algo mais amigável ou escondemos
+            document.getElementById('contador-global').innerText = "1";
         });
-}
-
-function gerarContadorAlternativo() {
-    let acessosLocais = parseInt(localStorage.getItem('backup_acessos')) || 128; 
-    
-    if (!sessionStorage.getItem('acesso_registrado_local')) {
-        acessosLocais++;
-        localStorage.setItem('backup_acessos', acessosLocais);
-        sessionStorage.setItem('acesso_registrado_local', 'true');
-    }
-    
-    const el = document.getElementById('contador-global');
-    if (el) el.innerText = `${acessosLocais}*`;
 }
 
 function baixarGradeImagem() {
@@ -1011,10 +999,12 @@ document.addEventListener('click', function(e) {
 // ==========================================================
 // 7. INICIALIZAÇÃO INVERSA SEGURA (ANTI-TRAVAMENTO)
 // ==========================================================
+contabilizarAcessoPlataforma(); 
+desenharGrade();
+
 desenharGrade(); 
 try {
     contabilizarAcessoPlataforma();
 } catch (e) {
     console.error("Incapaz de computar acessos remotamente:", e);
-    gerarContadorAlternativo();
 }
