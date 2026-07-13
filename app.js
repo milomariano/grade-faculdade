@@ -74,7 +74,7 @@ const materiasOfertadas = [
     { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
     { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
     { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
-    { id: 449, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
+    { id: 449, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" },
     { id: 33, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Terça-feira", horario: "19h00" },
     { id: 34, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Quinta-feira", horario: "19h00" },
     { id: 35, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Segunda-feira", horario: "19h00" },
@@ -511,9 +511,6 @@ const materiasOfertadas = [
 
     { id: 368, termo: "Termo 8", codigo: "0025", nome: "Introdução à Pesquisa Operacional", turma: "I", professor: "Chaves", dia: "Segunda-feira", horario: "19h00" },
     { id: 369, termo: "Termo 8", codigo: "0025", nome: "Introdução à Pesquisa Operacional", turma: "I", professor: "Chaves", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 370, termo: "Termo 8", codigo: "0027", nome: "Neurociência", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
-    { id: 371, termo: "Termo 8", codigo: "0027", nome: "Neurociência", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
 
     { id: 372, termo: "Termo 8", codigo: "0029", nome: "Competições em Ciências de Dados", turma: "I", professor: "Marcio", dia: "Terça-feira", horario: "10h00" },
     { id: 373, termo: "Termo 8", codigo: "0029", nome: "Competições em Ciências de Dados", turma: "I", professor: "Marcio", dia: "Quinta-feira", horario: "10h00" },
