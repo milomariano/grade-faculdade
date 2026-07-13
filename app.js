@@ -410,7 +410,7 @@ const materiasOfertadas = [
     { id: 299, termo: "Termo 8", codigo: "5933", nome: "Biossensores", turma: "I", professor: "Marli", dia: "Quinta-feira", horario: "13h30" },
 
     { id: 300, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "13h30" },
-    { id: 300, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "15h30" },
+    { id: 450, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "15h30" },
 
     { id: 301, termo: "Termo 8", codigo: "9794", nome: "Fundamentos de Administração", turma: "I", professor: "Iraci", dia: "Quarta-feira", horario: "10h00" },
 
