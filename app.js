@@ -71,6 +71,10 @@ const materiasOfertadas = [
     { id: 30, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IB", professor: "Angelo", dia: "Quarta-feira", horario: "15h30" },
     { id: 31, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Terça-feira", horario: "15h30" },
     { id: 32, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Quinta-feira", horario: "15h30" },
+    { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
+    { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
+    { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
+    { id: 449, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
     { id: 33, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Terça-feira", horario: "19h00" },
     { id: 34, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Quinta-feira", horario: "19h00" },
     { id: 35, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Segunda-feira", horario: "19h00" },
@@ -564,9 +568,6 @@ const materiasOfertadas = [
 
     { id: 406, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
     { id: 407, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
-    { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
-    { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
-    { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
     { id: 411, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Segunda-feira", horario: "19h00" },
     { id: 412, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Quarta-feira", horario: "19h00" },
     { id: 413, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
