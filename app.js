@@ -523,8 +523,8 @@ const materiasOfertadas = [
     { id: 378, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Terça-feira", horario: "19h00" },
     { id: 379, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Sexta-feira", horario: "21h00" },
 
-    { id: 380, termo: "Termo 6", codigo: "0037", nome: "RBVMM", turma: "I", professor: "Horácio", dia: "Segunda-feira", horario: "10h00" },
-    { id: 381, termo: "Termo 6", codigo: "0037", nome: "RBVMM", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "10h00" },
+    { id: 380, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Segunda-feira", horario: "10h00" },
+    { id: 381, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "10h00" },
 
     { id: 382, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "I", professor: "Gabriel", dia: "Segunda-feira", horario: "13h30" },
     { id: 383, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "I", professor: "Gabriel", dia: "Quarta-feira", horario: "13h30" },
@@ -577,10 +577,6 @@ const materiasOfertadas = [
     { id: 422, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Quarta-feira", horario: "13h30" },
     { id: 423, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
     { id: 424, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
-    { id: 425, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "10h00" },
-    { id: 426, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "10h00" },
-    { id: 427, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "N", professor: "Leduíno", dia: "Terça-feira", horario: "19h00" },
-    { id: 428, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "N", professor: "Leduíno", dia: "Sexta-feira", horario: "21h00" },
     { id: 429, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Segunda-feira", horario: "19h00" },
     { id: 430, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Quarta-feira", horario: "19h00" },
     { id: 431, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Segunda-feira", horario: "08h00" },
@@ -600,8 +596,8 @@ const materiasOfertadas = [
     { id: 444, termo: "Termo 8", codigo: "9983", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "N", professor: "Márcio", dia: "Terça-feira", horario: "10h00" },
     { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
     { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
-    { id: 445, termo: "Termo 6", codigo: "9979", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
-    { id: 446, termo: "Termo 6", codigo: "9978", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
+    { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
+    { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
     { id: 447, termo: "Termo 8", codigo: "9982", nome: "Processamento de Termorrígidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
     { id: 448, termo: "Termo 8", codigo: "9981", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "I", professor: "Márcio", dia: "Quinta-feira", horario: "10h00" },
 
