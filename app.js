@@ -520,8 +520,8 @@ const materiasOfertadas = [
     { id: 376, termo: "Termo 6", codigo: "0033", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "I", professor: "Sílvia", dia: "Quinta-feira", horario: "13h30" },
     { id: 377, termo: "Termo 6", codigo: "0034", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "N", professor: "Sílvia", dia: "Quinta-feira", horario: "19h00" },
 
-    { id: 378, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Terça-feira", horario: "19h00" },
-    { id: 379, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Sexta-feira", horario: "21h00" },
+    { id: 378, termo: "Termo 6", codigo: "0035", nome: "RPVMM II", turma: "N", professor: "Leduino", dia: "Terça-feira", horario: "19h00" },
+    { id: 379, termo: "Termo 6", codigo: "0035", nome: "RPVMM II", turma: "N", professor: "Leduino", dia: "Sexta-feira", horario: "21h00" },
 
     { id: 380, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Segunda-feira", horario: "10h00" },
     { id: 381, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "10h00" },
