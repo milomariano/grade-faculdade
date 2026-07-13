@@ -375,13 +375,13 @@ const materiasOfertadas = [
     { id: 277, termo: "Termo 6", codigo: "5852", nome: "Laboratório de Engenharia Bioquímica", turma: "I", professor: "Elisabeth", dia: "Segunda-feira", horario: "10h00" },
 
     // TERMO 8
-    { id: 278, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Segunda-feira", horario: "10h00" },
-    { id: 279, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Quarta-feira", horario: "10h00" },
+    { id: 278, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Terça-feira", horario: "08h00" },
+    { id: 279, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Terça-feira", horario: "10h00" },
 
     { id: 280, termo: "Termo 8", codigo: "9800", nome: "Tratamentos Térmicos", turma: "I", professor: "Capella", dia: "Segunda-feira", horario: "13h30" },
     { id: 281, termo: "Termo 8", codigo: "9800", nome: "Tratamentos Térmicos", turma: "I", professor: "Capella", dia: "Segunda-feira", horario: "15h30" },
 
-    { id: 282, termo: "Termo 8", codigo: "5785", nome: "Reologia", turma: "I", professor: "Lilia", dia: "Terça-feira", horario: "08h00" },
+    { id: 282, termo: "Termo 8", codigo: "5785", nome: "Reologia", turma: "I", professor: "Lilia", dia: "Quinta-feira", horario: "13h30" },
 
     { id: 283, termo: "Termo 8", codigo: "9801", nome: "Processamento de Termorrigidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
 
