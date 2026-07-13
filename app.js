@@ -56,14 +56,14 @@ const materiasOfertadas = [
     { id: 17, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NB", professor: "Manuel", dia: "Segunda-feira", horario: "21h00" },
     { id: 18, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NB", professor: "Manuel", dia: "Quarta-feira", horario: "21h00" },
 
-    { id: 19, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "13h30" },
-    { id: 20, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "15h30" },
-    { id: 21, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "13h30" },
-    { id: 22, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "15h30" },
-    { id: 23, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "19h00" },
-    { id: 24, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "21h00" },
-    { id: 25, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "19h00" },
-    { id: 26, termo: "Termo 2", codigo: "4370", nome: "Química Geral Exp.", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "21h00" },
+    { id: 19, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "13h30" },
+    { id: 20, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "15h30" },
+    { id: 21, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "13h30" },
+    { id: 22, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "15h30" },
+    { id: 23, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "19h00" },
+    { id: 24, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "21h00" },
+    { id: 25, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "19h00" },
+    { id: 26, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "21h00" },
 
     { id: 27, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Segunda-feira", horario: "13h30" },
     { id: 28, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Quarta-feira", horario: "13h30" },
@@ -215,7 +215,6 @@ const materiasOfertadas = [
     { id: 149, termo: "Termo 4", codigo: "5928", nome: "Lab. De Sistemas Computacionais (Circuitos Digitais)", turma: "N", professor: "Marcorin", dia: "Quinta-feira", horario: "19h00" },
 
     { id: 150, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Segunda-feira", horario: "08h00" },
-    { id: 151, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Sexta-feira", horario: "08h00" },
 
     { id: 152, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Segunda-feira", horario: "13h30" },
     { id: 153, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Quarta-feira", horario: "13h30" },
@@ -224,10 +223,8 @@ const materiasOfertadas = [
     { id: 156, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "N", professor: "Edson", dia: "Quinta-feira", horario: "21h00" },
     { id: 157, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "N", professor: "Edson", dia: "Sexta-feira", horario: "21h00" },
 
-    { id: 158, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "1A", professor: "Tatiana", dia: "Segunda-feira", horario: "13h30" },
-    { id: 159, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "1A", professor: "Tatiana", dia: "Quarta-feira", horario: "13h30" },
-    { id: 160, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IB", professor: "Tatiana", dia: "Segunda-feira", horario: "10h00" },
-    { id: 161, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IB", professor: "Tatiana", dia: "Quarta-feira", horario: "10h00" },
+    { id: 158, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IA", professor: "Tatiana", dia: "Segunda-feira", horario: "13h30" },
+    { id: 159, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IA", professor: "Tatiana", dia: "Quarta-feira", horario: "13h30" },
     { id: 162, termo: "Termo 4", codigo: "1272", nome: "Fisiologia Humana II", turma: "N", professor: "Flavio", dia: "Segunda-feira", horario: "21h00" },
     { id: 163, termo: "Termo 4", codigo: "1272", nome: "Fisiologia Humana II", turma: "N", professor: "Flavio", dia: "Quarta-feira", horario: "21h00" },
 
@@ -256,9 +253,7 @@ const materiasOfertadas = [
     { id: 182, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "N", professor: "Claudia", dia: "Sexta-feira", horario: "19h00" },
 
     { id: 183, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "I", professor: "Elisa", dia: "Quarta-feira", horario: "15h30" },
-    { id: 184, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "I", professor: "Elisa", dia: "Sexta-feira", horario: "15h30" },
     { id: 185, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "N", professor: "Elisa", dia: "Quarta-feira", horario: "19h00" },
-    { id: 186, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "N", professor: "Elisa", dia: "Sexta-feira", horario: "21h00" },
 
     // TERMO 5
     { id: 187, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "IA", professor: "Scriptore", dia: "Terça-feira", horario: "08h00" },
@@ -413,7 +408,6 @@ const materiasOfertadas = [
     { id: 300, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "15h30" },
 
     { id: 301, termo: "Termo 8", codigo: "9794", nome: "Fundamentos de Administração", turma: "I", professor: "Iraci", dia: "Quarta-feira", horario: "10h00" },
-    { id: 302, termo: "Termo 8", codigo: "9794", nome: "Fundamentos de Administração", turma: "I", professor: "Iraci", dia: "Sexta-feira", horario: "15h30" },
 
     { id: 303, termo: "Termo 8", codigo: "8273", nome: "Instrumentos Biomédicos", turma: "I", professor: "Saraiva", dia: "Terça-feira", horario: "15h30" },
     { id: 304, termo: "Termo 8", codigo: "8273", nome: "Instrumentos Biomédicos", turma: "I", professor: "Saraiva", dia: "Quinta-feira", horario: "15h30" },
@@ -550,8 +544,8 @@ const materiasOfertadas = [
     { id: 393, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Segunda-feira", horario: "19h00" },
     { id: 394, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Quarta-feira", horario: "19h00" },
 
-    { id: 395, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Segunda-feira", horario: "15h30" },
-    { id: 396, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Quarta-feira", horario: "15h30" },
+    { id: 395, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Segunda-feira", horario: "15h30" },
+    { id: 396, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Quarta-feira", horario: "15h30" },
     { id: 397, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "N", professor: "Berton", dia: "Segunda-feira", horario: "19h00" },
     { id: 398, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "N", professor: "Berton", dia: "Quarta-feira", horario: "19h00" },
 
@@ -565,12 +559,35 @@ const materiasOfertadas = [
 
     { id: 405, termo: "Termo 9", codigo: "6106", nome: "TCC-I-EC", turma: "I", professor: "Marcorin", dia: "Sexta-feira", horario: "19h00" },
 
-    { id: 406, termo: "Termo 7", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
-    { id: 407, termo: "Termo 7", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
+    { id: 406, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
+    { id: 407, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
     { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
     { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
     { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
-    { id: 411, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
+    { id: 411, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Segunda-feira", horario: "19h00" },
+    { id: 412, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Quarta-feira", horario: "19h00" },
+    { id: 413, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
+    { id: 414, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Quarta-feira", horario: "15h30" }, 
+    { id: 415, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IA", professor: "Marcorin", dia: "Segunda-feira", horario: "08h00" },
+    { id: 416, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IA", professor: "Marcorin", dia: "Quarta-feira", horario: "08h00" },
+    { id: 417, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IB", professor: "Marcorin", dia: "Terça-feira", horario: "08h00" },
+    { id: 418, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IB", professor: "Marcorin", dia: "Quinta-feira", horario: "08h00" },
+    { id: 419, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "I", professor: "Fabiano", dia: "Quinta-feira", horario: "15h30" },
+    { id: 420, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "19h00" },
+    { id: 421, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Segunda-feira", horario: "13h30" },
+    { id: 422, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Quarta-feira", horario: "13h30" },
+    { id: 423, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
+    { id: 424, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
+    { id: 425, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "10h00" },
+    { id: 426, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "10h00" },
+    { id: 427, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "N", professor: "Leduíno", dia: "Terça-feira", horario: "19h00" },
+    { id: 428, termo: "Termo 6", codigo: "9994", nome: "RPVMM II", turma: "N", professor: "Leduíno", dia: "Sexta-feira", horario: "21h00" },
+    { id: 429, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Segunda-feira", horario: "19h00" },
+    { id: 430, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Quarta-feira", horario: "19h00" },
+    { id: 431, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Segunda-feira", horario: "08h00" },
+    { id: 432, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Quarta-feira", horario: "10h00" },
+    { id: 433, termo: "Termo 6", codigo: "9993", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "I", professor: "Silva", dia: "Quarta-feira", horario: "15h30" },
+    { id: 434, termo: "Termo 6", codigo: "9993", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "N", professor: "Silva", dia: "Quarta-feira", horario: "19h00" },
 ];
 
 // Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
