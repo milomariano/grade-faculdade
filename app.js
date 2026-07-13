@@ -183,8 +183,8 @@ const materiasOfertadas = [
     { id: 123, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "N", professor: "AnaMoreira", dia: "Terça-feira", horario: "21h00" },
     { id: 124, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "N", professor: "AnaMoreira", dia: "Sexta-feira", horario: "19h00" },
 
+    { id: 126, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "I", professor: "Grasiele", dia: "Terça-Feira", horario: "15h30" },
     { id: 125, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "I", professor: "Grasiele", dia: "Quinta-feira", horario: "15h30" },
-    { id: 126, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "I", professor: "Grasiele", dia: "Sexta-feira", horario: "15h30" },
     { id: 127, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "N", professor: "Robson", dia: "Quinta-feira", horario: "21h00" },
     { id: 128, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "N", professor: "Robson", dia: "Sexta-feira", horario: "21h00" },
 
@@ -215,6 +215,7 @@ const materiasOfertadas = [
     { id: 149, termo: "Termo 4", codigo: "5928", nome: "Lab. De Sistemas Computacionais (Circuitos Digitais)", turma: "N", professor: "Marcorin", dia: "Quinta-feira", horario: "19h00" },
 
     { id: 150, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Segunda-feira", horario: "08h00" },
+    { id: 151, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Sexta-feira", horario: "08h00" },
 
     { id: 152, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Segunda-feira", horario: "13h30" },
     { id: 153, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Quarta-feira", horario: "13h30" },
@@ -262,7 +263,7 @@ const materiasOfertadas = [
     { id: 190, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "NB", professor: "Scriptore", dia: "Quinta-feira", horario: "21h00" },
 
     // TERMO 6
-    { id: 191, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "I", professor: "Kunkel", dia: "Terça-feira", horario: "13h30" },
+    { id: 191, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "I", professor: "Kunkel", dia: "Quinta-feira", horario: "13h30" },
     { id: 192, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "I", professor: "Kunkel", dia: "Quinta-feira", horario: "15h30" },
     { id: 193, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "N", professor: "Kunkel", dia: "Terça-feira", horario: "19h00" },
     { id: 194, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "N", professor: "Kunkel", dia: "Quinta-feira", horario: "19h00" },
@@ -394,7 +395,7 @@ const materiasOfertadas = [
     { id: 291, termo: "Termo 8", codigo: "5102", nome: "Otimização Inteira", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "15h30" },
     { id: 292, termo: "Termo 8", codigo: "5102", nome: "Otimização Inteira", turma: "I", professor: "Horácio", dia: "Sexta-feira", horario: "15h30" },
 
-    { id: 293, termo: "Termo 8", codigo: "8288", nome: "Segurança da Informação", turma: "I", professor: "Cappabianco", dia: "Segunda-feira", horario: "15h30" },
+    { id: 293, termo: "Termo 8", codigo: "8288", nome: "Segurança da Informação", turma: "I", professor: "Cappabianco", dia: "Sexta-feira", horario: "15h30" },
 
     { id: 294, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
     { id: 295, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Quarta-feira", horario: "15h30" },
@@ -437,7 +438,7 @@ const materiasOfertadas = [
     { id: 320, termo: "Termo 8", codigo: "9689", nome: "Engenharia de Microestrutura de Metais e Ligas", turma: "I", professor: "Kátia", dia: "Segunda-feira", horario: "08h00" },
     { id: 321, termo: "Termo 8", codigo: "9689", nome: "Engenharia de Microestrutura de Metais e Ligas", turma: "I", professor: "Kátia", dia: "Quarta-feira", horario: "08h00" },
 
-    { id: 322, termo: "Termo 8", codigo: "0001", nome: "Projetos Sustentáveis em Polímeros", turma: "I", professor: "Lemes", dia: "Terça-feira", horario: "10h00" },
+    { id: 322, termo: "Termo 8", codigo: "0001", nome: "Projetos Sustentáveis em Polímeros", turma: "I", professor: "Lemes", dia: "Quinta-feira", horario: "08h00" },
     { id: 323, termo: "Termo 8", codigo: "0001", nome: "Projetos Sustentáveis em Polímeros", turma: "I", professor: "Lemes", dia: "Quinta-feira", horario: "10h00" },
 
     { id: 324, termo: "Termo 6", codigo: "5402", nome: "Vidros, Vitrocerâmicos e Vidrados", turma: "N", professor: "Eliandra", dia: "Quinta-feira", horario: "19h00" },
@@ -449,8 +450,8 @@ const materiasOfertadas = [
     { id: 328, termo: "Termo 6", codigo: "5859", nome: "Botânica e Fisiologia Vegetal", turma: "I", professor: "Michael", dia: "Segunda-feira", horario: "13h30" },
     { id: 329, termo: "Termo 6", codigo: "5859", nome: "Botânica e Fisiologia Vegetal", turma: "I", professor: "Michael", dia: "Quarta-feira", horario: "13h30" },
 
-    { id: 330, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Segunda-feira", horario: "21h00" },
-    { id: 331, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Quarta-feira", horario: "21h00" },
+    { id: 330, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Sexta-feira", horario: "19h00" },
+    { id: 331, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Sexta-feira", horario: "21h00" },
 
     { id: 332, termo: "Termo 6", codigo: "5063", nome: "Biotecnologia de Energias Renováveis II", turma: "N", professor: "Danielle", dia: "Terça-feira", horario: "21h00" },
     { id: 333, termo: "Termo 6", codigo: "5063", nome: "Biotecnologia de Energias Renováveis II", turma: "N", professor: "Danielle", dia: "Quinta-feira", horario: "21h00" },
@@ -494,11 +495,11 @@ const materiasOfertadas = [
     { id: 359, termo: "Termo 5", codigo: "0019", nome: "Aplicações de Redes Neurais de Aprendizado Profundo", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "19h00" },
     { id: 360, termo: "Termo 5", codigo: "0019", nome: "Aplicações de Redes Neurais de Aprendizado Profundo", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "21h00" },
 
-    { id: 361, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "N", professor: "Evandro", dia: "Sexta-feira", horario: "15h30" },
-    { id: 362, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "I", professor: "Evandro", dia: "Terça-feira", horario: "19h00" },
+    { id: 361, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "I", professor: "Evandro", dia: "Sexta-feira", horario: "15h30" },
+    { id: 362, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "N", professor: "Evandro", dia: "Terça-feira", horario: "19h00" },
 
     { id: 363, termo: "Termo 4", codigo: "0023", nome: "Cultura dos Jogos Digitais", turma: "I", professor: "Pereira", dia: "Sexta-feira", horario: "13h30" },
-    { id: 364, termo: "Termo 4", codigo: "8536", nome: "Desenvolvimento de Games", turma: "I", professor: "Cappabianco", dia: "Terça-feira", horario: "21h00" },
+    { id: 364, termo: "Termo 4", codigo: "8536", nome: "Desenvolvimento de Games", turma: "N", professor: "Cappabianco", dia: "Terça-feira", horario: "21h00" },
     { id: 365, termo: "Termo 4", codigo: "0024", nome: "Cultura dos Jogos Digitais (Noturno)", turma: "N", professor: "Pereira", dia: "Sexta-feira", horario: "19h00" },
 
     { id: 366, termo: "Termo 4", codigo: "4352", nome: "Modelagem Computacional", turma: "I", professor: "Lobosco", dia: "Segunda-feira", horario: "15h30" },
@@ -516,8 +517,8 @@ const materiasOfertadas = [
     { id: 374, termo: "Termo 8", codigo: "0031", nome: "Introdução à Redes Neurais Artificiais", turma: "I", professor: "Quiles", dia: "Segunda-feira", horario: "13h30" },
     { id: 375, termo: "Termo 8", codigo: "0031", nome: "Introdução à Redes Neurais Artificiais", turma: "I", professor: "Quiles", dia: "Quarta-feira", horario: "13h30" },
 
-    { id: 376, termo: "Termo 6", codigo: "0033", nome: "Tópicos - Acessibilidade Digital", turma: "I", professor: "Silva", dia: "Quinta-feira", horario: "13h30" },
-    { id: 377, termo: "Termo 6", codigo: "0034", nome: "Tópicos - Acessibilidade Digital", turma: "N", professor: "Silva", dia: "Quinta-feira", horario: "19h00" },
+    { id: 376, termo: "Termo 6", codigo: "0033", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "I", professor: "Sílvia", dia: "Quinta-feira", horario: "13h30" },
+    { id: 377, termo: "Termo 6", codigo: "0034", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "N", professor: "Sílvia", dia: "Quinta-feira", horario: "19h00" },
 
     { id: 378, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Terça-feira", horario: "19h00" },
     { id: 379, termo: "Termo 6", codigo: "0035", nome: "RPVMM", turma: "N", professor: "Leduino", dia: "Sexta-feira", horario: "21h00" },
@@ -539,10 +540,10 @@ const materiasOfertadas = [
     { id: 389, termo: "Termo 1", codigo: "0050", nome: "Química Geral", turma: "I", professor: "Raquel", dia: "Segunda-feira", horario: "08h00" },
     { id: 390, termo: "Termo 1", codigo: "0050", nome: "Química Geral", turma: "I", professor: "Raquel", dia: "Quarta-feira", horario: "08h00" },
 
-    { id: 391, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Segunda-feira", horario: "15h30" },
-    { id: 392, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Quarta-feira", horario: "15h30" },
-    { id: 393, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Segunda-feira", horario: "19h00" },
-    { id: 394, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Quarta-feira", horario: "19h00" },
+    { id: 391, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Terça-feira", horario: "15h30" },
+    { id: 392, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Quinta-feira", horario: "15h30" },
+    { id: 393, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Terça-feira", horario: "21h00" },
+    { id: 394, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Quinta-feira", horario: "21h00" },
 
     { id: 395, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Segunda-feira", horario: "15h30" },
     { id: 396, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Quarta-feira", horario: "15h30" },
@@ -559,6 +560,8 @@ const materiasOfertadas = [
 
     { id: 405, termo: "Termo 9", codigo: "6106", nome: "TCC-I-EC", turma: "I", professor: "Marcorin", dia: "Sexta-feira", horario: "19h00" },
 
+    //ITENS ADICIONADOS MANUALMENTE CONFORME GRADE HORARIA EM 13/07 12H18 AM
+
     { id: 406, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
     { id: 407, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
     { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
@@ -568,10 +571,6 @@ const materiasOfertadas = [
     { id: 412, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Quarta-feira", horario: "19h00" },
     { id: 413, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
     { id: 414, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Quarta-feira", horario: "15h30" }, 
-    { id: 415, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IA", professor: "Marcorin", dia: "Segunda-feira", horario: "08h00" },
-    { id: 416, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IA", professor: "Marcorin", dia: "Quarta-feira", horario: "08h00" },
-    { id: 417, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IB", professor: "Marcorin", dia: "Terça-feira", horario: "08h00" },
-    { id: 418, termo: "Termo 10", codigo: "9998", nome: "ECOS EC", turma: "IB", professor: "Marcorin", dia: "Quinta-feira", horario: "08h00" },
     { id: 419, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "I", professor: "Fabiano", dia: "Quinta-feira", horario: "15h30" },
     { id: 420, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "19h00" },
     { id: 421, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Segunda-feira", horario: "13h30" },
@@ -586,8 +585,26 @@ const materiasOfertadas = [
     { id: 430, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Quarta-feira", horario: "19h00" },
     { id: 431, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Segunda-feira", horario: "08h00" },
     { id: 432, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Quarta-feira", horario: "10h00" },
-    { id: 433, termo: "Termo 6", codigo: "9993", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "I", professor: "Silva", dia: "Quarta-feira", horario: "15h30" },
-    { id: 434, termo: "Termo 6", codigo: "9993", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "N", professor: "Silva", dia: "Quarta-feira", horario: "19h00" },
+    { id: 433, termo: "Termo 6", codigo: "9992", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "I", professor: "Silva", dia: "Quarta-feira", horario: "15h30" },
+    { id: 434, termo: "Termo 6", codigo: "9992", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "N", professor: "Silva", dia: "Quarta-feira", horario: "19h00" },
+    { id: 435, termo: "Termo 4", codigo: "9991", nome: "Praticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "13h30" },
+    { id: 436, termo: "Termo 4", codigo: "9991", nome: "Praticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "15h30" },
+    { id: 436, termo: "Termo 4", codigo: "9990", nome: "Iniciação aos PEPICTs II", turma: "I", professor: "Edson", dia: "Sexta-feira", horario: "15h30" },
+    { id: 437, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "N", professor: "Claudia", dia: "Sexta-feira", horario: "21h00" },
+    { id: 438, termo: "Termo 4", codigo: "9989", nome: "Praticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "19h00" },
+    { id: 439, termo: "Termo 4", codigo: "9988", nome: "Praticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "21h00" },
+    { id: 440, termo: "Termo 6", codigo: "9987", nome: "Aplicações de Redes Neurais de Aprendizado Profundo em Sinais e Imagens Médicas", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "19h00" },
+    { id: 441, termo: "Termo 6", codigo: "9986", nome: "Aplicações de Redes Neurais de Aprendizado Profundo em Sinais e Imagens Médicas", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "21h00" },
+    { id: 442, termo: "Termo 4", codigo: "9985", nome: "Iniciação aos PEPICTs II", turma: "N", professor: "Edson", dia: "Sexta-feira", horario: "19h00" },
+    { id: 443, termo: "Termo 4", codigo: "8536", nome: "Desenvolvimento de Games", turma: "N", professor: "Pereira", dia: "Sexta-feira", horario: "19h00" },
+    { id: 444, termo: "Termo 8", codigo: "9983", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "N", professor: "Márcio", dia: "Terça-feira", horario: "10h00" },
+    { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
+    { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
+    { id: 445, termo: "Termo 6", codigo: "9979", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
+    { id: 446, termo: "Termo 6", codigo: "9978", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
+    { id: 447, termo: "Termo 8", codigo: "9982", nome: "Processamento de Termorrígidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
+    { id: 448, termo: "Termo 8", codigo: "9981", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "I", professor: "Márcio", dia: "Quinta-feira", horario: "10h00" },
+
 ];
 
 // Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
