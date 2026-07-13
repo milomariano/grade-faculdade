@@ -576,13 +576,7 @@ const materiasOfertadas = [
     { id: 408, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
     { id: 409, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
     { id: 410, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
-    { id: 411, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" },
-    { id: 412, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Segunda-feira", horario: "19h00" },
-    { id: 413, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Quarta-feira", horario: "19h00" },
-    { id: 414, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Terça-feira", horario: "19h00" },
-    { id: 415, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Quinta-feira", horario: "19h00" },
-    { id: 416, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Terça-feira", horario: "15h30" },
-    { id: 417, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Quinta-feira", horario: "15h30" }
+    { id: 411, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
 ];
 
 // Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
