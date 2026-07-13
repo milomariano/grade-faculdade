@@ -314,12 +314,6 @@ const materiasOfertadas = [
     { id: 226, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "N", professor: "Claudia Aline", dia: "Segunda-feira", horario: "21h00" },
     { id: 227, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "N", professor: "Claudia Aline", dia: "Quarta-feira", horario: "21h00" },
 
-
-    { id: 228, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Segunda-feira", horario: "13h30" },
-    { id: 229, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Quarta-feira", horario: "13h30" },
-    { id: 230, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IB", professor: "Angelo", dia: "Segunda-feira", horario: "15h30" },
-    { id: 231, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IB", professor: "Angelo", dia: "Quarta-feira", horario: "15h30" },
-
     { id: 232, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "I", professor: "Luzia", dia: "Terça-feira", horario: "15h30" },
     { id: 233, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "I", professor: "Luzia", dia: "Quinta-feira", horario: "15h30" },
     { id: 234, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "N", professor: "Luzia", dia: "Terça-feira", horario: "19h00" },
@@ -573,10 +567,10 @@ const materiasOfertadas = [
 
     { id: 406, termo: "Termo 7", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
     { id: 407, termo: "Termo 7", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
-    { id: 408, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
-    { id: 409, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
-    { id: 410, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
-    { id: 411, termo: "Termo 6", codigo: "6094", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
+    { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
+    { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
+    { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
+    { id: 411, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" }
 ];
 
 // Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
