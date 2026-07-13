@@ -334,8 +334,8 @@ const materiasOfertadas = [
     { id: 246, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "N", professor: "Ana", dia: "Quinta-feira", horario: "21h00" },
     { id: 247, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "N", professor: "Ana", dia: "Sexta-feira", horario: "21h00" },
 
-    { id: 248, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "T", professor: "Alvaro", dia: "Segunda-feira", horario: "13h30" },
-    { id: 249, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "T", professor: "Alvaro", dia: "Quarta-feira", horario: "13h30" },
+    { id: 248, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "I", professor: "Alvaro", dia: "Segunda-feira", horario: "13h30" },
+    { id: 249, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "I", professor: "Alvaro", dia: "Quarta-feira", horario: "13h30" },
     { id: 250, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "N", professor: "Denise", dia: "Segunda-feira", horario: "19h00" },
     { id: 251, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "N", professor: "Denise", dia: "Quarta-feira", horario: "19h00" },
 
@@ -573,8 +573,8 @@ const materiasOfertadas = [
     { id: 420, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "19h00" },
     { id: 421, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Segunda-feira", horario: "13h30" },
     { id: 422, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Quarta-feira", horario: "13h30" },
-    { id: 423, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
-    { id: 424, termo: "Termo 8", codigo: "9995", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
+    { id: 423, termo: "Termo 8", codigo: "0027", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
+    { id: 424, termo: "Termo 8", codigo: "0027", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
     { id: 429, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Segunda-feira", horario: "19h00" },
     { id: 430, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Quarta-feira", horario: "19h00" },
     { id: 431, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Segunda-feira", horario: "08h00" },
