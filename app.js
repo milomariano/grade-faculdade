@@ -1,13 +1,18 @@
 // ==========================================================
 // 1. CONFIGURAÇÕES E MAPEAMENTO DA ESTRUTURA DA GRADE
 // ==========================================================
-// ==========================================================
-// 1. CONFIGURAÇÕES E GERAÇÃO DE CORES ÚNICAS (NUNCA SE REPETEM)
-// ==========================================================
 const diasSemana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"];
 const horarios = ["08h00", "10h00", "13h30", "15h30", "19h00", "21h00"];
 
 const mapeamentoCores = {};
+
+// ==========================================================
+// FUNÇÃO PARA REMOVER ACENTOS E IGNORAR MAIÚSCULAS
+// ==========================================================
+const normalizar = (str) => {
+    if (!str) return "";
+    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
 
 function obterCorMateria(codigo) {
     if (mapeamentoCores[codigo]) {
@@ -35,7 +40,7 @@ function obterCorMateria(codigo) {
 // 2. BASE DE DADOS EXTRAÍDA E NORMALIZADA DO PDF
 // ==========================================================
 const materiasOfertadas = [
-    // TERMO 2// TERMO 2
+    // TERMO 2
     { id: 1, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IA", professor: "Pereira", dia: "Terça-feira", horario: "10h00" },
     { id: 2, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IB", professor: "Pereira", dia: "Terça-feira", horario: "13h30" },
     { id: 3, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IC", professor: "Evandro", dia: "Sexta-feira", horario: "13h30" },
@@ -597,12 +602,13 @@ const materiasOfertadas = [
     { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
     { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
     { id: 447, termo: "Termo 8", codigo: "9982", nome: "Processamento de Termorrígidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
-    { id: 448, termo: "Termo 8", codigo: "9981", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "I", professor: "Márcio", dia: "Quinta-feira", horario: "10h00" },
-
+    { id: 448, termo: "Termo 8", codigo: "9981", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "I", professor: "Márcio", dia: "Quinta-feira", horario: "10h00" }
 ];
 
 // Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
 let gradeSalvaIds = JSON.parse(localStorage.getItem('minhaGradeIds_2026')) || [];
+// Onde salvamos as pequenas anotações (salas) de cada matéria
+let notasSalvas = JSON.parse(localStorage.getItem('minhasNotas_2026')) || {};
 
 // ==========================================================
 // 3. FUNÇÃO PARA RENDERIZAR A INTERFACE DA GRADE HORÁRIA
@@ -635,40 +641,51 @@ function desenharGrade() {
             let estiloDesign = "bg-white hover:bg-blue-50/40 cursor-pointer";
             
             if (materiaNaCelula) {
-                // Mantemos as classes estruturais limpas, pois a cor vem do atributo 'style' agora
-                estiloDesign = `cursor-pointer border-2 transition-all shadow-sm`;
+                // Caixinha padrão da matéria selecionada
+                estiloDesign = `cursor-pointer border-2 transition-all shadow-sm relative`;
+                
+            // Pega a nota salva para esta matéria, se houver
+                const notaAtual = notasSalvas[materiaNaCelula.id] || "";
+                
+                // Se tem nota, mostra APENAS o texto (sem o quadro branco e com fonte mais fina). Se não tem, mostra "Adicionar nota".
+                const htmlNota = notaAtual 
+                    ? `<div onclick="editarNota(event, ${materiaNaCelula.id})" class="text-[10.5px] text-gray-900 mt-1 font-medium hover:underline break-words">📌 ${notaAtual}</div>` 
+                    : `<div onclick="editarNota(event, ${materiaNaCelula.id})" class="text-[9px] text-gray-500 mt-1 hover:text-gray-900 underline font-medium transition-colors">Adicionar nota</div>`;
+            
                 conteudoCelula = `
-                    <div class="text-center p-1">
-                        <p class="font-bold text-[11px] leading-tight">${materiaNaCelula.nome}</p>
+                    <div class="text-center p-1 w-full flex flex-col items-center justify-center h-full">
+                        <p class="font-bold text-[11px] leading-tight px-1">${materiaNaCelula.nome}</p>
                         <p class="text-[10px] opacity-90 font-medium mt-0.5">T: ${materiaNaCelula.turma} - ${materiaNaCelula.professor}</p>
-                        <p class="text-[9px] opacity-75 font-mono">Cod: ${materiaNaCelula.codigo}</p>
+                        <p class="text-[9px] opacity-75 font-mono mb-0.5">Cod: ${materiaNaCelula.codigo}</p>
+                        ${htmlNota}
                     </div>
                 `;
-        } else {
-            const busca = document.getElementById('busca-materia') ? document.getElementById('busca-materia').value.toLowerCase() : "";
-            
-            const possuiOfertaNesseHorario = materiasOfertadas.some(m => 
-                m.dia === dia && 
-                m.horario === horario && 
-                (m.nome.toLowerCase().includes(busca) || m.codigo.includes(busca)) // Filtra apenas pelo campo de texto
-            );
+            } else {
+                const inputBusca = document.getElementById('busca-materia');
+                const busca = inputBusca ? normalizar(inputBusca.value) : "";
+                
+                const possuiOfertaNesseHorario = materiasOfertadas.some(m => 
+                    m.dia === dia && 
+                    m.horario === horario && 
+                    (normalizar(m.nome).includes(busca) || normalizar(m.codigo).includes(busca))
+                );
                 if (possuiOfertaNesseHorario) {
                     conteudoCelula = `<span class="text-blue-400 font-bold text-lg opacity-0 hover:opacity-100 transition-opacity">+</span>`;
                 }
             }
             
-        // Se houver uma matéria na célula, ela pega a cor HSL única. Se não, fica vazia.
-        const atributoStyleColor = materiaNaCelula ? obterCorMateria(materiaNaCelula.codigo) : "";
+            // Se houver uma matéria na célula, ela pega a cor HSL única. Se não, fica vazia.
+            const atributoStyleColor = materiaNaCelula ? obterCorMateria(materiaNaCelula.codigo) : "";
 
-        html += `
-            <div 
-                onclick="celulaClicada('${dia}', '${horario}')" 
-                class="h-24 p-1 border border-gray-200 flex flex-col items-center justify-center transition-colors ${estiloDesign}"
-                ${atributoStyleColor}
-            >
-                ${conteudoCelula}
-            </div>
-        `;
+            html += `
+                <div 
+                    onclick="celulaClicada('${dia}', '${horario}')" 
+                    class="h-24 p-1 border border-gray-200 flex flex-col items-center justify-center transition-colors ${estiloDesign}"
+                    ${atributoStyleColor}
+                >
+                    ${conteudoCelula}
+                </div>
+            `;
         });
     });
     
@@ -686,17 +703,17 @@ function celulaClicada(dia, horario) {
     diaAtualSelecionado = dia;
     horarioAtualSelecionado = horario;
     
-    const busca = document.getElementById('busca-materia') ? document.getElementById('busca-materia').value.toLowerCase() : "";
+    const inputBusca = document.getElementById('busca-materia');
+    const busca = inputBusca ? normalizar(inputBusca.value) : "";
 
     const opcoesDisponiveis = materiasOfertadas.filter(m => 
         m.dia === dia && 
         m.horario === horario && 
-        (m.nome.toLowerCase().includes(busca) || m.codigo.includes(busca)) // Filtra apenas pelo campo de texto
+        (normalizar(m.nome).includes(busca) || normalizar(m.codigo).includes(busca))
     );
-    
+
     document.getElementById('modal-titulo').innerText = `Matérias para ${dia} às ${horario}`;
     
-    // Vinculado ao ID correto sem o erro de digitação
     const listaContainer = document.getElementById('lista-materias');
     listaContainer.innerHTML = "";
     
@@ -709,13 +726,11 @@ function celulaClicada(dia, horario) {
     } else {
         opcoesDisponiveis.forEach(materia => {
             const jaEstaNaGrade = gradeSalvaIds.includes(materia.id);
-            const estiloHtmlCor = obterCorMateria(materia.codigo); // Guarda a string style="background-color:..."
+            const estiloHtmlCor = obterCorMateria(materia.codigo); 
             
             const btn = document.createElement('button');
-            // Removemos 'corEstilo' da classe e deixamos o Tailwind gerenciar o restante do botão
             btn.className = `w-full text-left p-3 border rounded-lg transition-all flex justify-between items-center ${jaEstaNaGrade ? 'ring-2 ring-offset-2 ring-gray-700 font-bold' : 'hover:scale-[1.01]'}`;
             
-            // Limpa os delimitadores da string e injeta como um atributo style nativo no botão
             btn.setAttribute('style', estiloHtmlCor.replace('style="', '').slice(0, -1));
             btn.innerHTML = `
                 <div class="flex flex-col">
@@ -750,7 +765,6 @@ function celulaClicada(dia, horario) {
 // 5. INCLUSÃO, REMOÇÃO E TRATAMENTO DE CONFLITOS DE HORÁRIO
 // ==========================================================
 function alternarMateria(materia) {
-    // Busca todas as instâncias da mesma matéria/turma selecionada
     const todasInstanciasDaTurma = materiasOfertadas.filter(m => 
         m.codigo === materia.codigo && m.turma === materia.turma
     );
@@ -758,23 +772,18 @@ function alternarMateria(materia) {
     const idsInstancias = todasInstanciasDaTurma.map(m => m.id);
     const estaAtiva = gradeSalvaIds.includes(materia.id);
     
-    // Se a matéria JÁ ESTÁ ativa, o clique serve para removê-la da grade
     if (estaAtiva) {
         gradeSalvaIds = gradeSalvaIds.filter(id => !idsInstancias.includes(id));
     } else {
-        // --- NOVO BLOQUEIO DE DUPLICIDADE POR CÓDIGO ---
-        // Procura se o aluno já adicionou ESSA disciplina, mas de OUTRA turma em qualquer outro horário
         const jaPossuiMesmoCodigo = materiasOfertadas.some(m => 
             gradeSalvaIds.includes(m.id) && m.codigo === materia.codigo && m.turma !== materia.turma
         );
 
         if (jaPossuiMesmoCodigo) {
             alert(`Bloqueio: Você já incluiu a matéria "${materia.nome}" em sua grade! Não é permitido matricular-se na mesma disciplina em duas turmas ou horários diferentes.`);
-            return; // Interrompe a execução e não adiciona nada
+            return; 
         }
-        // -----------------------------------------------
 
-        // Caso não haja duplicidade de código, remove conflitos físicos de colisão de horário
         todasInstanciasDaTurma.forEach(novaInstancia => {
             const colisao = materiasOfertadas.find(m => 
                 gradeSalvaIds.includes(m.id) && m.dia === novaInstancia.dia && m.horario === novaInstancia.horario
@@ -786,7 +795,6 @@ function alternarMateria(materia) {
             }
         });
         
-        // Adiciona de forma segura as novas instâncias horárias
         gradeSalvaIds.push(...idsInstancias);
     }
     
@@ -808,7 +816,6 @@ function removerMateriaPorId(id) {
     desenharGrade();
 }
 
-// FUNÇÃO PARA LIMPAR TODA A GRADE SALVA
 function limparTodaGrade() {
     if (confirm("Tem certeza que deseja apagar todas as matérias selecionadas da sua grade?")) {
         gradeSalvaIds = [];
@@ -817,29 +824,21 @@ function limparTodaGrade() {
     }
 }
 
-function filtrarGrade() {
-    desenharGrade();
-}
-
 function fecharModal() {
     document.getElementById('modal').classList.add('hidden');
 }
 
 // ==========================================================
-// 6. CONTADOR DE ACESSOS GLOBAL (VIA COUNT.CO)
+// 6. CONTADOR DE ACESSOS GLOBAL (VIA COUNT.CO) E EXPORTAÇÃO DE IMAGEM
 // ==========================================================
 function contabilizarAcessoPlataforma() {
-    // Este link é um contador público e estável
-    // O ID "grade-faculdade-milo" criará um contador único para o seu projeto
     fetch("https://count.co/hit/grade-faculdade-milo/acessos-globais")
         .then(response => response.json())
         .then(data => {
-            // O serviço retorna o valor atualizado no campo 'hits'
             document.getElementById('contador-global').innerText = data.hits;
         })
         .catch(error => {
             console.error("Erro ao conectar no contador:", error);
-            // Se falhar, tentamos exibir algo mais amigável ou escondemos
             document.getElementById('contador-global').innerText = "1";
         });
 }
@@ -885,6 +884,12 @@ function baixarGradeImagem() {
         if (spanBotao && spanBotao.innerText === "+") {
             spanBotao.style.display = 'none';
         }
+        
+        // Esconde o botão "Adicionar nota" na foto, se ele não tiver sido preenchido
+        const btnAddNota = celula.querySelector('div[onclick^="editarNota"]');
+        if (btnAddNota && btnAddNota.innerText.includes("Adicionar nota")) {
+            btnAddNota.style.display = 'none';
+        }
     });
 
     const gridPai = clone.querySelector('.grid');
@@ -911,6 +916,29 @@ function baixarGradeImagem() {
         document.body.removeChild(clone);
     });
 }
+
+// ==========================================================
+// FUNÇÃO PARA EDITAR ANOTAÇÕES (SALA/LAB)
+// ==========================================================
+window.editarNota = function(event, idMateria) {
+    // Impede que clicar na nota abra também o menu de remover a matéria
+    event.stopPropagation(); 
+    
+    let notaAtual = notasSalvas[idMateria] || "";
+    let novaNota = prompt("Anotação para este horário (ex: Sala 302, Lab. Informática):", notaAtual);
+    
+    // Se o usuário não clicou em "Cancelar"
+    if (novaNota !== null) { 
+        if (novaNota.trim() === "") {
+            delete notasSalvas[idMateria]; // Se deixou vazio, apaga a nota
+        } else {
+            notasSalvas[idMateria] = novaNota.trim().substring(0, 30); // Limita a 30 letras para não estourar o bloco
+        }
+        localStorage.setItem('minhasNotas_2026', JSON.stringify(notasSalvas));
+        desenharGrade(); // Atualiza a caixinha na mesma hora
+    }
+};
+
 // ==========================================================
 // NEW: NOVA LÓGICA DE PESQUISA POR NOME COM JANELA DE HORÁRIOS
 // ==========================================================
@@ -918,7 +946,7 @@ function baixarGradeImagem() {
 function buscarMateriasGerais() {
     const input = document.getElementById('busca-materia');
     const containerResultados = document.getElementById('resultados-busca');
-    const busca = input.value.toLowerCase().trim();
+    const busca = normalizar(input.value.trim());
     
     if (busca.length < 2) {
         containerResultados.innerHTML = "";
@@ -932,8 +960,8 @@ function buscarMateriasGerais() {
     materiasOfertadas.forEach(m => {
         const chaveIdentificacao = `${m.codigo}-${m.nome}-${m.turma}`;
         
-        // Procura em toda a base de dados apenas pela correspondência do texto digitado
-        if (!nomesRastreados.has(chaveIdentificacao) && (m.nome.toLowerCase().includes(busca) || m.codigo.includes(busca))) {
+        // Aplica o normalizar() no nome da matéria do BD para comparar com a busca normalizada
+        if (!nomesRastreados.has(chaveIdentificacao) && (normalizar(m.nome).includes(busca) || normalizar(m.codigo).includes(busca))) {
             nomesRastreados.add(chaveIdentificacao);
             materiasUnicas.push(m);
         }
@@ -964,13 +992,11 @@ function buscarMateriasGerais() {
 }
 
 function mostrarHorariosDaMateria(codigo, turma) {
-    // Localiza todos os horários associados a essa mesma matéria e turma na base de dados
     const todasInstancias = materiasOfertadas.filter(m => m.codigo === codigo && m.turma === turma);
     if (todasInstancias.length === 0) return;
     
     const primeira = todasInstancias[0];
     
-    // Configura o título do Modal existente para exibir os dados gerais da matéria
     document.getElementById('modal-titulo').innerText = `${primeira.nome} (Turma ${primeira.turma})`;
     
     const listaContainer = document.getElementById('lista-materias');
@@ -983,7 +1009,6 @@ function mostrarHorariosDaMateria(codigo, turma) {
         <p class="text-xs font-bold text-gray-700 mb-2 uppercase tracking-wide">Horários de Oferta no PDF:</p>
     `;
     
-    // Cria um botão descritivo mostrando cada dia/hora que ela ocupa
     todasInstancias.forEach(instancia => {
         const itemHorario = document.createElement('div');
         itemHorario.className = "w-full p-2.5 bg-blue-50 border border-blue-200 rounded-lg text-xs font-medium text-blue-800 flex justify-between items-center mb-1.5";
@@ -994,7 +1019,6 @@ function mostrarHorariosDaMateria(codigo, turma) {
         listaContainer.appendChild(itemHorario);
     });
 
-    // Adiciona o botão definitivo para incluir/remover essa matéria da grade completa
     const jaEstaNaGrade = gradeSalvaIds.includes(primeira.id);
     const btnAcao = document.createElement('button');
     
@@ -1010,11 +1034,9 @@ function mostrarHorariosDaMateria(codigo, turma) {
     
     listaContainer.appendChild(btnAcao);
     
-    // Abre a janela flutuante na tela
     document.getElementById('modal').classList.remove('hidden');
 }
 
-// Fecha a caixinha se clicar em qualquer outra parte da tela
 document.addEventListener('click', function(e) {
     const container = document.getElementById('resultados-busca');
     const input = document.getElementById('busca-materia');
@@ -1026,9 +1048,6 @@ document.addEventListener('click', function(e) {
 // ==========================================================
 // 7. INICIALIZAÇÃO INVERSA SEGURA (ANTI-TRAVAMENTO)
 // ==========================================================
-contabilizarAcessoPlataforma(); 
-desenharGrade();
-
 desenharGrade(); 
 try {
     contabilizarAcessoPlataforma();
