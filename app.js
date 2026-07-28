@@ -11,7 +11,7 @@ const mapeamentoCores = {};
 // ==========================================================
 const normalizar = (str) => {
     if (!str) return "";
-    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return str.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 };
 
 function obterCorMateria(codigo) {
@@ -19,17 +19,13 @@ function obterCorMateria(codigo) {
         return mapeamentoCores[codigo];
     }
 
-    // Transforma o texto do código em um número inteiro único (Hash)
     let hash = 0;
     const strCodigo = String(codigo);
     for (let i = 0; i < strCodigo.length; i++) {
         hash = strCodigo.charCodeAt(i) + ((hash << 5) - hash);
     }
 
-    // O "Matiz" (Hue) vai de 0 a 360 no círculo cromático, gerando cores únicas
     const matriz = Math.abs(hash) % 360;
-
-    // Saturação 75% e Luminosidade 92% geram tons pastéis claros perfeitos para o fundo
     const estiloCorEstatico = `style="background-color: hsl(${matriz}, 75%, 92%); border-color: hsl(${matriz}, 70%, 80%); color: hsl(${matriz}, 90%, 25%);"`;
 
     mapeamentoCores[codigo] = estiloCorEstatico;
@@ -37,577 +33,4516 @@ function obterCorMateria(codigo) {
 }
 
 // ==========================================================
-// 2. BASE DE DADOS EXTRAÍDA E NORMALIZADA DO PDF
+// 2. BASE DE DADOS EM FORMATO JSON
 // ==========================================================
-const materiasOfertadas = [
-    // TERMO 2
-    { id: 1, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IA", professor: "Pereira", dia: "Terça-feira", horario: "10h00" },
-    { id: 2, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IB", professor: "Pereira", dia: "Terça-feira", horario: "13h30" },
-    { id: 3, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IC", professor: "Evandro", dia: "Sexta-feira", horario: "13h30" },
-    { id: 4, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "ID", professor: "Walter", dia: "Terça-feira", horario: "15h30" },
-    { id: 5, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "NA", professor: "Walter", dia: "Terça-feira", horario: "19h00" },
-    { id: 6, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "NB", professor: "Evandro", dia: "Terça-feira", horario: "21h00" },
-    
-    { id: 7, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IA", professor: "Thaciana", dia: "Terça-feira", horario: "13h30" },
-    { id: 8, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IA", professor: "Thaciana", dia: "Quarta-feira", horario: "13h30" },
-    { id: 9, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IB", professor: "Thaciana", dia: "Segunda-feira", horario: "10h00" },
-    { id: 10, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IB", professor: "Thaciana", dia: "Quarta-feira", horario: "10h00" },
-    { id: 11, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IC", professor: "Antonelli", dia: "Quarta-feira", horario: "10h00" },
-    { id: 12, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IC", professor: "Antonelli", dia: "Sexta-feira", horario: "10h00" },
-    { id: 13, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "ID", professor: "Espirito", dia: "Segunda-feira", horario: "15h30" },
-    { id: 14, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "ID", professor: "Espirito", dia: "Quarta-feira", horario: "15h30" },
-    { id: 15, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NA", professor: "Espirito", dia: "Segunda-feira", horario: "19h00" },
-    { id: 16, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NA", professor: "Espirito", dia: "Quarta-feira", horario: "19h00" },
-    { id: 17, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NB", professor: "Manuel", dia: "Segunda-feira", horario: "21h00" },
-    { id: 18, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "NB", professor: "Manuel", dia: "Quarta-feira", horario: "21h00" },
+// COLE SUA BASE JSON COMPLETA DENTRO DESTE ARRAY:
+const novaBaseJson = [
+    {
+        "id": 0,
+        "name": "Álgebra Linear II",
+        "code": 5373,
+        "short_code": "ALII",
+        "teacher": "Abbas",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/algebra-linear-ii"
+    },
+    {
+        "id": 1,
+        "name": "Álgebra Linear II",
+        "code": 5373,
+        "short_code": "ALII",
+        "teacher": "Macedo",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/algebra-linear-ii"
+    },
+    {
+        "id": 2,
+        "name": "Algoritmos e Estruturas de Dados I",
+        "code": 2832,
+        "short_code": "AEDI",
+        "teacher": "Regina Coelho",
+        "class": "IA",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-i"
+    },
+    {
+        "id": 3,
+        "name": "Algoritmos e Estruturas de Dados I",
+        "code": 2832,
+        "short_code": "AEDI",
+        "teacher": "Arlindo",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-i"
+    },
+    {
+        "id": 4,
+        "name": "Algoritmos e Estruturas de Dados I",
+        "code": 2832,
+        "short_code": "AEDI",
+        "teacher": "Regina Coelho",
+        "class": "NA",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-i"
+    },
+    {
+        "id": 5,
+        "name": "Algoritmos e Estruturas de Dados I",
+        "code": 2832,
+        "short_code": "AEDI",
+        "teacher": "Luis Pereira",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-i"
+    },
+    {
+        "id": 6,
+        "name": "Algoritmos e Estruturas de Dados II",
+        "code": 2833,
+        "short_code": "AEDII",
+        "teacher": "Berton",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-ii"
+    },
+    {
+        "id": 7,
+        "name": "Algoritmos e Estruturas de Dados II",
+        "code": 2833,
+        "short_code": "AEDII",
+        "teacher": "Berton",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/algoritmos-estruturas-dados-ii"
+    },
+    {
+        "id": 8,
+        "name": "Analise de Investimentos e Riscos",
+        "code": 5095,
+        "short_code": "AIR",
+        "teacher": "Sato",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/analise-investimentos-riscos"
+    },
+    {
+        "id": 9,
+        "name": "Analise de Investimentos e Riscos",
+        "code": 5095,
+        "short_code": "AIR",
+        "teacher": "Sato",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/analise-investimentos-riscos"
+    },
+    {
+        "id": 10,
+        "name": "Análise Real II",
+        "code": 5918,
+        "short_code": "ARII",
+        "teacher": "Vanessa Paschoa",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/analise-real-ii"
+    },
+    {
+        "id": 11,
+        "name": "Análise Real II",
+        "code": 5918,
+        "short_code": "ARII",
+        "teacher": "Cláudia Aline",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/analise-real-ii"
+    },
+    {
+        "id": 12,
+        "name": "Anatomia",
+        "code": 5124,
+        "short_code": "ANATOMIA",
+        "teacher": "Fernando",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/anatomia"
+    },
+    {
+        "id": 13,
+        "name": "Anatomia",
+        "code": 5124,
+        "short_code": "ANATOMIA",
+        "teacher": "Fernando",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/anatomia"
+    },
+    {
+        "id": 14,
+        "name": "Aplicações de Redes Neurais de Aprendizado Profundo em Sinais e Imagens Médicas",
+        "code": 10015,
+        "short_code": "ARNAPS",
+        "teacher": "Matheus",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": ""
+    },
+    {
+        "id": 15,
+        "name": "Arquitetura e organização de Computadores",
+        "code": 3519,
+        "short_code": "AOC",
+        "teacher": "Cappabianco",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/arquitetura-organizacao-computadores"
+    },
+    {
+        "id": 16,
+        "name": "Arquitetura e organização de Computadores",
+        "code": 3519,
+        "short_code": "AOC",
+        "teacher": "Denise",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/arquitetura-organizacao-computadores"
+    },
+    {
+        "id": 17,
+        "name": "Banco de Dados",
+        "code": 2831,
+        "short_code": "BD",
+        "teacher": "Musa",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/banco-dados"
+    },
+    {
+        "id": 18,
+        "name": "Banco de Dados",
+        "code": 2831,
+        "short_code": "BD",
+        "teacher": "Musa",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/banco-dados"
+    },
+    {
+        "id": 19,
+        "name": "Biologia Geral",
+        "code": 5740,
+        "short_code": "BIOG",
+        "teacher": "Vilaverde",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/biologia-geral"
+    },
+    {
+        "id": 20,
+        "name": "Biologia Geral",
+        "code": 5740,
+        "short_code": "BIOG",
+        "teacher": "Michael",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/biologia-geral"
+    },
+    {
+        "id": 21,
+        "name": "Biologia Molecular do Gene",
+        "code": 5843,
+        "short_code": "BMC",
+        "teacher": "Luciane",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/biologia-molecular-do-gene"
+    },
+    {
+        "id": 22,
+        "name": "Biologia Molecular do Gene",
+        "code": 5843,
+        "short_code": "BMC",
+        "teacher": "Luciane",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/biologia-molecular-do-gene"
+    },
+    {
+        "id": 23,
+        "name": "Bioquímica I",
+        "code": 5842,
+        "short_code": "BIOQI",
+        "teacher": "Martin",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/bioquimica-i"
+    },
+    {
+        "id": 24,
+        "name": "Bioquímica I",
+        "code": 5842,
+        "short_code": "BIOQI",
+        "teacher": "Martin",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/bioquimica-i"
+    },
+    {
+        "id": 25,
+        "name": "Bioquímica II",
+        "code": 5847,
+        "short_code": "BIOQII",
+        "teacher": "Katia Conceicao",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/bioquimica-ii"
+    },
+    {
+        "id": 26,
+        "name": "Bioquímica II",
+        "code": 5847,
+        "short_code": "BIOQII",
+        "teacher": "Katia Conceicao",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/bioquimica-ii"
+    },
+    {
+        "id": 27,
+        "name": "Biossensores",
+        "code": 5933,
+        "short_code": "BIOSEN",
+        "teacher": "Marli",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/biossensores"
+    },
+    {
+        "id": 28,
+        "name": "Biotecnologia Ambiental I",
+        "code": 5857,
+        "short_code": "BAI",
+        "teacher": "Danielle",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/biotecnologia-ambiental-i"
+    },
+    {
+        "id": 29,
+        "name": "Biotecnologia Ambiental I",
+        "code": 5857,
+        "short_code": "BAI",
+        "teacher": "Danielle",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/biotecnologia-ambiental-i"
+    },
+    {
+        "id": 30,
+        "name": "Biotecnologia Animal",
+        "code": 5858,
+        "short_code": "BIOTECANI",
+        "teacher": "Loures",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/biotecnologia-animal"
+    },
+    {
+        "id": 31,
+        "name": "Biotecnologia de Energias Renováveis II",
+        "code": 5063,
+        "short_code": "BIOENERII",
+        "teacher": "Danielle",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/biotecnologia-de-energias-renovaveis-ii"
+    },
+    {
+        "id": 32,
+        "name": "Botânica e Fisiologia Vegetal",
+        "code": 5859,
+        "short_code": "BFVPPC",
+        "teacher": "Michael",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/botanica-e-fisiologia-vegetal-ppc"
+    },
+    {
+        "id": 33,
+        "name": "Cálculo Numérico",
+        "code": 2828,
+        "short_code": "CN",
+        "teacher": "Felipe",
+        "class": "IA",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quarta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/calculo-numerico"
+    },
+    {
+        "id": 34,
+        "name": "Cálculo Numérico",
+        "code": 2828,
+        "short_code": "CN",
+        "teacher": "Lobosco",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/calculo-numerico"
+    },
+    {
+        "id": 35,
+        "name": "Cálculo Numérico",
+        "code": 2828,
+        "short_code": "CN",
+        "teacher": "Leduíno",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/calculo-numerico"
+    },
+    {
+        "id": 36,
+        "name": "Cálculo Numérico",
+        "code": 2828,
+        "short_code": "CN",
+        "teacher": "Lobosco",
+        "class": "NB",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/calculo-numerico"
+    },
+    {
+        "id": 37,
+        "name": "Cerâmicas Refratárias",
+        "code": 5875,
+        "short_code": "CREF",
+        "teacher": "Albers",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/ceramicas-refratarias"
+    },
+    {
+        "id": 38,
+        "name": "Ciência e Tecnologia dos Materiais",
+        "code": 4764,
+        "short_code": "CTM",
+        "teacher": "Gisele",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-materiais"
+    },
+    {
+        "id": 39,
+        "name": "Ciência e Tecnologia dos Materiais",
+        "code": 4764,
+        "short_code": "CTM",
+        "teacher": "Leonardo",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-materiais"
+    },
+    {
+        "id": 40,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Vanessa Pereira",
+        "class": "IA",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 41,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Vanessa Pereira",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 42,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Evandro",
+        "class": "IC",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 43,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Walter",
+        "class": "ID",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 44,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Walter",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 45,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Evandro",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 46,
+        "name": "Circuitos Elétricos I",
+        "code": 5902,
+        "short_code": "CE",
+        "teacher": "Henrique Amorim",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/circuitos-eletricos-i"
+    },
+    {
+        "id": 47,
+        "name": "Circuitos Elétricos I",
+        "code": 5902,
+        "short_code": "CE",
+        "teacher": "Henrique Amorim",
+        "class": "IB",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/circuitos-eletricos-i"
+    },
+    {
+        "id": 48,
+        "name": "Circuitos Elétricos I",
+        "code": 5902,
+        "short_code": "CE",
+        "teacher": "Edson Fernandes",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/circuitos-eletricos-i"
+    },
+    {
+        "id": 49,
+        "name": "Compiladores",
+        "code": 2615,
+        "short_code": "COMP",
+        "teacher": "Rodrigo Contreras",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/compiladores"
+    },
+    {
+        "id": 50,
+        "name": "Compiladores",
+        "code": 2615,
+        "short_code": "COMP",
+        "teacher": "Galvão",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/compiladores"
+    },
+    {
+        "id": 51,
+        "name": "Computação Gráfica",
+        "code": 3051,
+        "short_code": "CG",
+        "teacher": "Ana",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/computacao-grafica"
+    },
+    {
+        "id": 52,
+        "name": "Computação Gráfica",
+        "code": 3051,
+        "short_code": "CG",
+        "teacher": "Ana",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/computacao-grafica"
+    },
+    {
+        "id": 53,
+        "name": "Controle de Sistemas Dinâmicos",
+        "code": 5386,
+        "short_code": "CSD",
+        "teacher": "Paiva",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Segunda",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/controle-sistemas-dinamicos"
+    },
+    {
+        "id": 54,
+        "name": "Controle de Sistemas Dinâmicos",
+        "code": 5386,
+        "short_code": "CSD",
+        "teacher": "Sérgio",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/controle-sistemas-dinamicos"
+    },
+    {
+        "id": 55,
+        "name": "Cultura dos Jogos Digitais",
+        "code": 6076,
+        "short_code": "CJD",
+        "teacher": "Vanessa Pereira",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/cultura-jogos-digitais"
+    },
+    {
+        "id": 56,
+        "name": "Desenho Técnico Básico",
+        "code": 5900,
+        "short_code": "DT",
+        "teacher": "Shida",
+        "class": "IA",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/desenho-tecnico-basico"
+    },
+    {
+        "id": 57,
+        "name": "Desenho Técnico Básico",
+        "code": 5900,
+        "short_code": "DT",
+        "teacher": "Shida",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/desenho-tecnico-basico"
+    },
+    {
+        "id": 58,
+        "name": "Desenho Técnico Básico",
+        "code": 5900,
+        "short_code": "DT",
+        "teacher": "Shida",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/desenho-tecnico-basico"
+    },
+    {
+        "id": 59,
+        "name": "Desenho Técnico Básico",
+        "code": 5900,
+        "short_code": "DT",
+        "teacher": "Shida",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/desenho-tecnico-basico"
+    },
+    {
+        "id": 60,
+        "name": "Desenvolvimento de Games",
+        "code": 8536,
+        "short_code": "DG",
+        "teacher": "Vanessa Pereira",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/desenvolvimento-games"
+    },
+    {
+        "id": 61,
+        "name": "Desenvolvimento de Games",
+        "code": 8536,
+        "short_code": "DG",
+        "teacher": "Cappabianco",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/desenvolvimento-games"
+    },
+    {
+        "id": 62,
+        "name": "Ecologia Avançada",
+        "code": 5869,
+        "short_code": "ECOAVAN",
+        "teacher": "Amado",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/ecologia-avancada"
+    },
+    {
+        "id": 65,
+        "name": "ECOS EC",
+        "code": null,
+        "short_code": "EE",
+        "teacher": "Marcorin",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00",
+            "08h00 - 10h00",
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Segunda",
+            "Terça",
+            "Quarta",
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "10",
+        "description_url": ""
+    },
+    {
+        "id": 67,
+        "name": "Eletrônica",
+        "code": 8521,
+        "short_code": "ELE",
+        "teacher": "Gurjão",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/eletronica"
+    },
+    {
+        "id": 68,
+        "name": "Eletrônica",
+        "code": 8521,
+        "short_code": "ELE",
+        "teacher": "Aoki",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/eletronica"
+    },
+    {
+        "id": 69,
+        "name": "Engenharia Bioquímica II",
+        "code": 5851,
+        "short_code": "EBIOIIPPC",
+        "teacher": "Elisabeth",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/engenharia-bioquimica-ii-ppc"
+    },
+    {
+        "id": 70,
+        "name": "Engenharia Clínica Hospitalar Aplicada",
+        "code": 6107,
+        "short_code": "ECHA",
+        "teacher": "Matheus",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/engenharia-clinica-hospitalar-aplicada"
+    },
+    {
+        "id": 71,
+        "name": "Engenharia de Microestrutura de Metais e Ligas",
+        "code": 9689,
+        "short_code": "EMML",
+        "teacher": "Katia Cardoso",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/engenharia-de-microestrutura-de-metais-e-ligas"
+    },
+    {
+        "id": 72,
+        "name": "Engenharia de Software",
+        "code": 2614,
+        "short_code": "ES",
+        "teacher": "Fabio Silveira",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/engenharia-software"
+    },
+    {
+        "id": 73,
+        "name": "Engenharia de Software",
+        "code": 2614,
+        "short_code": "ES",
+        "teacher": "Otávio",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/engenharia-software"
+    },
+    {
+        "id": 74,
+        "name": "Engenharia Médica Aplicada",
+        "code": 6112,
+        "short_code": "EMEDA",
+        "teacher": "Adenauer",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "10",
+        "description_url": "https://ajudauni.com/subject/engenharia-medica-aplicada"
+    },
+    {
+        "id": 75,
+        "name": "Engenharia Médica Aplicada",
+        "code": 6112,
+        "short_code": "EMEDA",
+        "teacher": "Adenauer",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-N",
+        "term": "10",
+        "description_url": "https://ajudauni.com/subject/engenharia-medica-aplicada"
+    },
+    {
+        "id": 76,
+        "name": "Ensaio de Materiais",
+        "code": 5387,
+        "short_code": "ENSMAT",
+        "teacher": "Dilermando",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/ensaios-de-materiais"
+    },
+    {
+        "id": 77,
+        "name": "Ensaio de Materiais",
+        "code": 5387,
+        "short_code": "ENSMAT",
+        "teacher": "Dilermando",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/ensaios-de-materiais"
+    },
+    {
+        "id": 78,
+        "name": "Equações Diferenciais Ordinárias",
+        "code": 6094,
+        "short_code": "EDO",
+        "teacher": "Karen",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 79,
+        "name": "Equações Diferenciais Ordinárias",
+        "code": 6094,
+        "short_code": "EDO",
+        "teacher": "Cláudia Aline",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 80,
+        "name": "Experimentando a Engenharia de Materiais",
+        "code": 10012,
+        "short_code": "EEM",
+        "teacher": "Albers",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": ""
+    },
+    {
+        "id": 81,
+        "name": "Farmacologia Molecular",
+        "code": 5140,
+        "short_code": "FM",
+        "teacher": "Flavio Aimbire",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/farmacologia-molecular"
+    },
+    {
+        "id": 82,
+        "name": "Fenômenos do Contínuo Experimental",
+        "code": 5364,
+        "short_code": "FECONTE",
+        "teacher": "Fabiano",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-continuo-experimental"
+    },
+    {
+        "id": 83,
+        "name": "Fenômenos do Contínuo Experimental",
+        "code": 5364,
+        "short_code": "FECONTE",
+        "teacher": "Fabiano",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-continuo-experimental"
+    },
+    {
+        "id": 84,
+        "name": "Fenômenos Eletromagnéticos",
+        "code": 4748,
+        "short_code": "FEMAG",
+        "teacher": "Kelly",
+        "class": "IA",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-eletromagneticos"
+    },
+    {
+        "id": 85,
+        "name": "Fenômenos Eletromagnéticos",
+        "code": 4748,
+        "short_code": "FEMAG",
+        "teacher": "Kelly",
+        "class": "IB",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-eletromagneticos"
+    },
+    {
+        "id": 86,
+        "name": "Fenômenos Eletromagnéticos",
+        "code": 4748,
+        "short_code": "FEMAG",
+        "teacher": "Nirton",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-eletromagneticos"
+    },
+    {
+        "id": 87,
+        "name": "Fenômenos Eletromagnéticos",
+        "code": 4748,
+        "short_code": "FEMAG",
+        "teacher": "Nirton",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fenomenos-eletromagneticos"
+    },
+    {
+        "id": 88,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Thaciana",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 89,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Thaciana",
+        "class": "IB",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 90,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Antonelli",
+        "class": "IC",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quarta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 91,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Espírito",
+        "class": "ID",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 92,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Espírito",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 93,
+        "name": "Fenômenos Mecânicos",
+        "code": 4369,
+        "short_code": "FEMEC",
+        "teacher": "Manuel",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fenomenos-mecanicos"
+    },
+    {
+        "id": 94,
+        "name": "Fisiologia Humana II",
+        "code": 8272,
+        "short_code": "FHII",
+        "teacher": "Tatiana",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fisiologia-humana-ii"
+    },
+    {
+        "id": 95,
+        "name": "Fisiologia Humana II",
+        "code": 8272,
+        "short_code": "FHII",
+        "teacher": "Tatiana",
+        "class": "IB",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fisiologia-humana-ii"
+    },
+    {
+        "id": 96,
+        "name": "Fisiologia Humana II",
+        "code": 8272,
+        "short_code": "FHII",
+        "teacher": "Flavio Aimbire",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fisiologia-humana-ii"
+    },
+    {
+        "id": 97,
+        "name": "Funções Analíticas",
+        "code": 3584,
+        "short_code": "FUAN",
+        "teacher": "Leandro",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Quarta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/funcoes-analiticas"
+    },
+    {
+        "id": 98,
+        "name": "Funções Analíticas",
+        "code": 3584,
+        "short_code": "FUAN",
+        "teacher": "Ana Moreira",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/funcoes-analiticas"
+    },
+    {
+        "id": 99,
+        "name": "Fundamentos da Eng. Bioquímica",
+        "code": 5119,
+        "short_code": "FEB",
+        "teacher": "Saraiva",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fundamentos-de-engenharia-bioquimica"
+    },
+    {
+        "id": 100,
+        "name": "Fundamentos da Eng. Bioquímica",
+        "code": 5119,
+        "short_code": "FEB",
+        "teacher": "Elisabeth",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/fundamentos-de-engenharia-bioquimica"
+    },
+    {
+        "id": 101,
+        "name": "Fundamentos de Administração",
+        "code": 9794,
+        "short_code": "FDA",
+        "teacher": "Iraci",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/fundamentos-administração"
+    },
+    {
+        "id": 102,
+        "name": "Fundamentos de Biologia Moderna",
+        "code": 5703,
+        "short_code": "FBM",
+        "teacher": "Vilaverde",
+        "class": "IA",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fundamentos-biologia-moderna"
+    },
+    {
+        "id": 103,
+        "name": "Fundamentos de Biologia Moderna",
+        "code": 5703,
+        "short_code": "FBM",
+        "teacher": "Vilaverde",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/fundamentos-biologia-moderna"
+    },
+    {
+        "id": 104,
+        "name": "Fundamentos de Eletrônica Aplicada",
+        "code": 9803,
+        "short_code": "FEA",
+        "teacher": "Fernanda",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/fundamentos-eletronica-aplicada"
+    },
+    {
+        "id": 105,
+        "name": "Fundamentos de Eletrônica Aplicada",
+        "code": 9803,
+        "short_code": "FEA",
+        "teacher": "Fernanda",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/fundamentos-eletronica-aplicada"
+    },
+    {
+        "id": 106,
+        "name": "Geometria Analítica",
+        "code": 2650,
+        "short_code": "GA",
+        "teacher": "Renato Martins",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/geometria-analitica"
+    },
+    {
+        "id": 107,
+        "name": "Geometria Analítica",
+        "code": 2650,
+        "short_code": "GA",
+        "teacher": "Renato Martins",
+        "class": "IB",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/geometria-analitica"
+    },
+    {
+        "id": 108,
+        "name": "Geometria Analítica",
+        "code": 2650,
+        "short_code": "GA",
+        "teacher": "Vanessa Paschoa",
+        "class": "IC",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/geometria-analitica"
+    },
+    {
+        "id": 109,
+        "name": "Geometria Analítica",
+        "code": 2650,
+        "short_code": "GA",
+        "teacher": "Ana Moreira",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/geometria-analitica"
+    },
+    {
+        "id": 110,
+        "name": "Geometria Analítica",
+        "code": 2650,
+        "short_code": "GA",
+        "teacher": "Thadeu",
+        "class": "NB",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/geometria-analitica"
+    },
+    {
+        "id": 111,
+        "name": "Gestão de projetos",
+        "code": 5886,
+        "short_code": "GESTPROJ",
+        "teacher": "Iraci",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/gestao-de-projetos"
+    },
+    {
+        "id": 112,
+        "name": "Imunologia Aplicada",
+        "code": 5864,
+        "short_code": "IMUNOAP",
+        "teacher": "Loures",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/imunologia-aplicada"
+    },
+    {
+        "id": 113,
+        "name": "Inferência e Análise de Regressão",
+        "code": 4401,
+        "short_code": "IAR",
+        "teacher": "Luzia",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/inferencia-e-analise-de-regressao"
+    },
+    {
+        "id": 114,
+        "name": "Inferência e Análise de Regressão",
+        "code": 4401,
+        "short_code": "IAR",
+        "teacher": "Luzia",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/inferencia-e-analise-de-regressao"
+    },
+    {
+        "id": 115,
+        "name": "Iniciação aos PEPICTs II",
+        "code": 9820,
+        "short_code": "IPEPICTII",
+        "teacher": "Edson Fernandes",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/iniciacao-aos-pepict-ii"
+    },
+    {
+        "id": 116,
+        "name": "Iniciação aos PEPICTs II",
+        "code": 9820,
+        "short_code": "IPEPICTII",
+        "teacher": "Edson Fernandes",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/iniciacao-aos-pepict-ii"
+    },
+    {
+        "id": 117,
+        "name": "Instrumentos Biomédicos",
+        "code": 8273,
+        "short_code": "INSTRUMED",
+        "teacher": "Saraiva",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/instrumentos-biomedicos"
+    },
+    {
+        "id": 118,
+        "name": "Internet das Coisas",
+        "code": 9881,
+        "short_code": "IOT",
+        "teacher": "Gabriel",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/internet-coisas"
+    },
+    {
+        "id": 119,
+        "name": "Internet das Coisas",
+        "code": 9881,
+        "short_code": "IOT",
+        "teacher": "Gabriel",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/internet-coisas"
+    },
+    {
+        "id": 120,
+        "name": "Introdução à Biologia de Sistemas",
+        "code": 5390,
+        "short_code": "INTROBDS",
+        "teacher": "André",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-biologia-de-sistemas"
+    },
+    {
+        "id": 121,
+        "name": "Introdução à Biologia de Sistemas",
+        "code": 5390,
+        "short_code": "INTROBDS",
+        "teacher": "André",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-biologia-de-sistemas"
+    },
+    {
+        "id": 122,
+        "name": "Introdução a Biotecnologia",
+        "code": 4760,
+        "short_code": "IBIO",
+        "teacher": "Dayane",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/introducao-biotecnologia"
+    },
+    {
+        "id": 123,
+        "name": "Introdução a Biotecnologia",
+        "code": 4760,
+        "short_code": "IBIO",
+        "teacher": "Dayane",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/introducao-biotecnologia"
+    },
+    {
+        "id": 124,
+        "name": "Introdução à Economia",
+        "code": 9793,
+        "short_code": "IE",
+        "teacher": "Scriptore",
+        "class": "IA",
+        "hours": [
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-economia"
+    },
+    {
+        "id": 125,
+        "name": "Introdução à Economia",
+        "code": 9793,
+        "short_code": "IE",
+        "teacher": "Scriptore",
+        "class": "IB",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-economia"
+    },
+    {
+        "id": 126,
+        "name": "Introdução à Economia",
+        "code": 9793,
+        "short_code": "IE",
+        "teacher": "Scriptore",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-economia"
+    },
+    {
+        "id": 127,
+        "name": "Introdução à Economia",
+        "code": 9793,
+        "short_code": "IE",
+        "teacher": "Scriptore",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-economia"
+    },
+    {
+        "id": 128,
+        "name": "Introdução à Eletrotécnica",
+        "code": 5453,
+        "short_code": "IELETRO",
+        "teacher": "Fabiano",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-eletrotecnica"
+    },
+    {
+        "id": 129,
+        "name": "Introdução à Eletrotécnica",
+        "code": 5453,
+        "short_code": "IELETRO",
+        "teacher": "Fabiano",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/introducao-eletrotecnica"
+    },
+    {
+        "id": 130,
+        "name": "Introdução à Engenharia de Materiais",
+        "code": 4373,
+        "short_code": "IENGM",
+        "teacher": "Passador",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/engenharia-materiais"
+    },
+    {
+        "id": 131,
+        "name": "Introdução à Engenharia de Materiais",
+        "code": 4373,
+        "short_code": "IENGM",
+        "teacher": "Albers",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/engenharia-materiais"
+    },
+    {
+        "id": 132,
+        "name": "Introdução à Geometria Diferencial",
+        "code": 6085,
+        "short_code": "IGD",
+        "teacher": "Patrícia",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/geometria-diferencial"
+    },
+    {
+        "id": 133,
+        "name": "Introdução à Nanotecnologia",
+        "code": 5169,
+        "short_code": "INANO",
+        "teacher": "Elias",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/introducao-nanotecnologia"
+    },
+    {
+        "id": 134,
+        "name": "Introdução à Nanotecnologia",
+        "code": 5169,
+        "short_code": "INANO",
+        "teacher": "Elias",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/introducao-nanotecnologia"
+    },
+    {
+        "id": 135,
+        "name": "Introdução à Pesquisa Operacional",
+        "code": 4409,
+        "short_code": "IPESQOP",
+        "teacher": "Chaves",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/introducao-pesquisa-operacional"
+    },
+    {
+        "id": 136,
+        "name": "Introdução à Redes Neurais Artificiais",
+        "code": 3489,
+        "short_code": "IRN",
+        "teacher": "Quiles",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/introducao-redes-neurais"
+    },
+    {
+        "id": 137,
+        "name": "Lab. Biologia Molecular e Celular",
+        "code": 4375,
+        "short_code": "LABBMC",
+        "teacher": "Claudia Campos",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-biologia-molecular-celular"
+    },
+    {
+        "id": 138,
+        "name": "Lab. Biologia Molecular e Celular",
+        "code": 4375,
+        "short_code": "LABBMC",
+        "teacher": "Claudia Campos",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-biologia-molecular-celular"
+    },
+    {
+        "id": 139,
+        "name": "Lab. De Sistemas Computacionais (Circuitos Digitais)",
+        "code": 5928,
+        "short_code": "LABCD",
+        "teacher": "Sérgio",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-circuitos-digitais"
+    },
+    {
+        "id": 140,
+        "name": "Lab. De Sistemas Computacionais (Circuitos Digitais)",
+        "code": 5928,
+        "short_code": "LABCD",
+        "teacher": "Marcorin",
+        "class": "IB",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-circuitos-digitais"
+    },
+    {
+        "id": 141,
+        "name": "Lab. De Sistemas Computacionais (Circuitos Digitais)",
+        "code": 5928,
+        "short_code": "LABCD",
+        "teacher": "Marcorin",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-circuitos-digitais"
+    },
+    {
+        "id": 142,
+        "name": "Lab.de Sistemas Computacionais: SO",
+        "code": 6102,
+        "short_code": "LABSO",
+        "teacher": "Tiago Oliveira",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/laboratorio-sistemas-operacionais"
+    },
+    {
+        "id": 143,
+        "name": "Lab.de Sistemas Computacionais: SO",
+        "code": 6102,
+        "short_code": "LABSO",
+        "teacher": "Tiago Oliveira",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/laboratorio-sistemas-operacionais"
+    },
+    {
+        "id": 144,
+        "name": "Laboratório de Bioquímica Analítica",
+        "code": 5850,
+        "short_code": "LABBA",
+        "teacher": "Katia Conceicao",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quinta",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-bioquimica-analitica"
+    },
+    {
+        "id": 145,
+        "name": "Laboratório de Circuitos Elétricos",
+        "code": 6089,
+        "short_code": "LABCE",
+        "teacher": "Gabriel",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/laboratorio-circuitos-eletricos"
+    },
+    {
+        "id": 146,
+        "name": "Laboratório de Circuitos Elétricos",
+        "code": 6089,
+        "short_code": "LABCE",
+        "teacher": "Gabriel",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/laboratorio-circuitos-eletricos"
+    },
+    {
+        "id": 147,
+        "name": "Laboratório de Eletrônica Digital",
+        "code": 5930,
+        "short_code": "LABED",
+        "teacher": "Karina",
+        "class": "IA",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-eletrônica-digital"
+    },
+    {
+        "id": 148,
+        "name": "Laboratório de Eletrônica Digital",
+        "code": 5930,
+        "short_code": "LABED",
+        "teacher": "Karina",
+        "class": "IB",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-eletrônica-digital"
+    },
+    {
+        "id": 149,
+        "name": "Laboratório de Eletrônica Digital",
+        "code": 5930,
+        "short_code": "LABED",
+        "teacher": "Gurjão",
+        "class": "IC",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-eletrônica-digital"
+    },
+    {
+        "id": 150,
+        "name": "Laboratório de Eletrônica Digital",
+        "code": 5930,
+        "short_code": "LABED",
+        "teacher": "Karina",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-eletrônica-digital"
+    },
+    {
+        "id": 151,
+        "name": "Laboratório de Eletrônica Digital",
+        "code": 5930,
+        "short_code": "LABED",
+        "teacher": "Karina",
+        "class": "NB",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-eletrônica-digital"
+    },
+    {
+        "id": 152,
+        "name": "Laboratório de Engenharia Bioquímica",
+        "code": 5852,
+        "short_code": "LABEB",
+        "teacher": "Elisabeth",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Segunda",
+            "Segunda"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-engenharia-bioquimica"
+    },
+    {
+        "id": 153,
+        "name": "Laboratório de Microbiologia",
+        "code": 5848,
+        "short_code": "LABMICROB",
+        "teacher": "Elisa",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-microbiologia"
+    },
+    {
+        "id": 154,
+        "name": "Laboratório de Microbiologia",
+        "code": 5848,
+        "short_code": "LABMICROB",
+        "teacher": "Elisa",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/laboratorio-microbiologia"
+    },
+    {
+        "id": 155,
+        "name": "Laboratório de Sistemas computacionais - Eng.de Sistemas",
+        "code": 6095,
+        "short_code": "LABES",
+        "teacher": "Tiago Silva",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-engenharia-sistemas"
+    },
+    {
+        "id": 156,
+        "name": "Laboratório de Sistemas computacionais - Eng.de Sistemas",
+        "code": 6095,
+        "short_code": "LABES",
+        "teacher": "Tiago Silva",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/laboratorio-engenharia-sistemas"
+    },
+    {
+        "id": 157,
+        "name": "Lógica de Programação",
+        "code": 9394,
+        "short_code": "LP",
+        "teacher": "Didier",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/logica-programacao"
+    },
+    {
+        "id": 158,
+        "name": "Lógica de Programação",
+        "code": 9394,
+        "short_code": "LP",
+        "teacher": "Didier",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/logica-programacao"
+    },
+    {
+        "id": 159,
+        "name": "Matemática Discreta",
+        "code": 2201,
+        "short_code": "MD",
+        "teacher": "Erwin",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-discreta"
+    },
+    {
+        "id": 160,
+        "name": "Matemática Discreta",
+        "code": 2201,
+        "short_code": "MD",
+        "teacher": "Erwin",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-discreta"
+    },
+    {
+        "id": 161,
+        "name": "Matemática Discreta",
+        "code": 2201,
+        "short_code": "MD",
+        "teacher": "Felipe",
+        "class": "IC",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Quarta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-discreta"
+    },
+    {
+        "id": 162,
+        "name": "Matemática Discreta",
+        "code": 2201,
+        "short_code": "MD",
+        "teacher": "Robson",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-discreta"
+    },
+    {
+        "id": 163,
+        "name": "Matemática Discreta",
+        "code": 2201,
+        "short_code": "MD",
+        "teacher": "Macedo",
+        "class": "NB",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-discreta"
+    },
+    {
+        "id": 164,
+        "name": "Matemática Geral",
+        "code": 5844,
+        "short_code": "MGI",
+        "teacher": "Karen",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-geral"
+    },
+    {
+        "id": 165,
+        "name": "Matemática Geral",
+        "code": 5844,
+        "short_code": "MGI",
+        "teacher": "Daniela Oliveira",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/matematica-geral"
+    },
+    {
+        "id": 166,
+        "name": "Mecânica Geral",
+        "code": 4770,
+        "short_code": "MECG",
+        "teacher": "Eudes",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/mecanica-geral"
+    },
+    {
+        "id": 167,
+        "name": "Mecânica Geral",
+        "code": 4770,
+        "short_code": "MECG",
+        "teacher": "Eudes",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/mecanica-geral"
+    },
+    {
+        "id": 168,
+        "name": "Metalurgia Mecânica",
+        "code": 6928,
+        "short_code": "METM",
+        "teacher": "Danieli",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/metalurgia-mecanica"
+    },
+    {
+        "id": 169,
+        "name": "Metodologia da Pesquisa e Comunicação Científica",
+        "code": 4374,
+        "short_code": "MPCC",
+        "teacher": "Gurjão",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/metodologia-pesquisa-comunicacao-cientifica"
+    },
+    {
+        "id": 170,
+        "name": "Métodos matemáticos para engenharia",
+        "code": 8533,
+        "short_code": "MME",
+        "teacher": "Paiva",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Segunda",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/metodos-matematicos-engenharia"
+    },
+    {
+        "id": 171,
+        "name": "Métodos Numéricos para Eq. Diferenciais",
+        "code": 6104,
+        "short_code": "MNED",
+        "teacher": "Thadeu",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/metodos-numericos-para-equacoes-diferenciais"
+    },
+    {
+        "id": 172,
+        "name": "Microbiologia Geral",
+        "code": 5120,
+        "short_code": "MBG",
+        "teacher": "Elisa",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/microbiologia-geral"
+    },
+    {
+        "id": 173,
+        "name": "Microbiologia Geral",
+        "code": 5120,
+        "short_code": "MBG",
+        "teacher": "Fernando",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/microbiologia-geral"
+    },
+    {
+        "id": 174,
+        "name": "Modelagem Computacional",
+        "code": 4352,
+        "short_code": "MC",
+        "teacher": "Lobosco",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/modelagem-computacional"
+    },
+    {
+        "id": 175,
+        "name": "Modelagem Computacional",
+        "code": 4352,
+        "short_code": "MC",
+        "teacher": "Lobosco",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/modelagem-computacional"
+    },
+    {
+        "id": 176,
+        "name": "Mudança do Clima e Sociedade",
+        "code": 4774,
+        "short_code": "MCS",
+        "teacher": "Amado",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/mudanca-clima-sociedade"
+    },
+    {
+        "id": 177,
+        "name": "Mudança do Clima e Sociedade",
+        "code": 4774,
+        "short_code": "MCS",
+        "teacher": "Amado",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/mudanca-clima-sociedade"
+    },
+    {
+        "id": 178,
+        "name": "Otimização Inteira",
+        "code": 5102,
+        "short_code": "OI",
+        "teacher": "Horácio",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/otimizacao-inteira"
+    },
+    {
+        "id": 179,
+        "name": "Praticas em Projetos Extensionistas II",
+        "code": 8251,
+        "short_code": "PPEII",
+        "teacher": "Marli",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/pratica-projetos-extensionistas-ii"
+    },
+    {
+        "id": 180,
+        "name": "Praticas em Projetos Extensionistas II",
+        "code": 8251,
+        "short_code": "PPEII",
+        "teacher": "Marli",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/pratica-projetos-extensionistas-ii"
+    },
+    {
+        "id": 181,
+        "name": "Probabilidade",
+        "code": 3163,
+        "short_code": "PROB",
+        "teacher": "Sâmia",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/probabilidade"
+    },
+    {
+        "id": 182,
+        "name": "Probabilidade",
+        "code": 3163,
+        "short_code": "PROB",
+        "teacher": "Sâmia",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/probabilidade"
+    },
+    {
+        "id": 183,
+        "name": "Processamento de Materiais Cerâmicos",
+        "code": 5873,
+        "short_code": "PMC",
+        "teacher": "Leonardo",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quarta",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/processamento-materiais-ceramicos"
+    },
+    {
+        "id": 184,
+        "name": "Processamento de Sinais",
+        "code": 8218,
+        "short_code": "PS",
+        "teacher": "Martini",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/processamento-sinais"
+    },
+    {
+        "id": 185,
+        "name": "Processamento de Sinais",
+        "code": 8218,
+        "short_code": "PS",
+        "teacher": "Martini",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/processamento-sinais"
+    },
+    {
+        "id": 186,
+        "name": "Processamento de Termoplásticos",
+        "code": 5879,
+        "short_code": "PTERMO",
+        "teacher": "Passador",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "CFE-I",
+        "term": "10",
+        "description_url": "https://ajudauni.com/subject/processamento-termoplasticos"
+    },
+    {
+        "id": 187,
+        "name": "Processamento de Termorrígidos e Elastômeros",
+        "code": 9801,
+        "short_code": "PDTEE",
+        "teacher": "Passador",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/processamento-de-termorrigidos-e-elastomeros"
+    },
+    {
+        "id": 188,
+        "name": "Programação Concorrente e Distribuída",
+        "code": 3580,
+        "short_code": "PCD",
+        "teacher": "Álvaro",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/programacao-concorrente"
+    },
+    {
+        "id": 189,
+        "name": "Programação Concorrente e Distribuída",
+        "code": 3580,
+        "short_code": "PCD",
+        "teacher": "Denise",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/programacao-concorrente"
+    },
+    {
+        "id": 190,
+        "name": "Programação Orientada a Objetos",
+        "code": 2471,
+        "short_code": "POO",
+        "teacher": "Otávio",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/programacao-objeto"
+    },
+    {
+        "id": 191,
+        "name": "Programação Orientada a Objetos",
+        "code": 2471,
+        "short_code": "POO",
+        "teacher": "Rodrigo Contreras",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/programacao-objeto"
+    },
+    {
+        "id": 192,
+        "name": "Projeto e Análise de Algoritmos",
+        "code": 3579,
+        "short_code": "PAA",
+        "teacher": "Sanderson",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/projeto-analise-algoritmos"
+    },
+    {
+        "id": 193,
+        "name": "Projeto e Análise de Algoritmos",
+        "code": 3579,
+        "short_code": "PAA",
+        "teacher": "Reginaldo",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/projeto-analise-algoritmos"
+    },
+    {
+        "id": 194,
+        "name": "Projeto e Análise de Algoritmos",
+        "code": 3579,
+        "short_code": "PAA",
+        "teacher": "Reginaldo",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/projeto-analise-algoritmos"
+    },
+    {
+        "id": 195,
+        "name": "Projetos em Engenharia Biomédica",
+        "code": 6110,
+        "short_code": "PEB",
+        "teacher": "Urban",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "10",
+        "description_url": "https://ajudauni.com/subject/projetos-engenharia-biomedica"
+    },
+    {
+        "id": 196,
+        "name": "Projetos em Engenharia Biomédica",
+        "code": 6110,
+        "short_code": "PEB",
+        "teacher": "Urban",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-N",
+        "term": "10",
+        "description_url": "https://ajudauni.com/subject/projetos-engenharia-biomedica"
+    },
+    {
+        "id": 197,
+        "name": "Projetos Sustentáveis em Polímeros",
+        "code": 8519,
+        "short_code": "PSP",
+        "teacher": "Lemes",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quinta",
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/projetos-sustentaveis-em-polimeros"
+    },
+    {
+        "id": 198,
+        "name": "Química Analítica",
+        "code": 5883,
+        "short_code": "QA",
+        "teacher": "Elias",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quarta",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/quimica-analitica"
+    },
+    {
+        "id": 199,
+        "name": "Química Geral",
+        "code": 5704,
+        "short_code": "QG",
+        "teacher": "Raquel",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/quimica-geral"
+    },
+    {
+        "id": 200,
+        "name": "Química Geral Experimental",
+        "code": 4370,
+        "short_code": "QGE",
+        "teacher": "Hugo",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/quimica-geral-experimental"
+    },
+    {
+        "id": 201,
+        "name": "Química Geral Experimental",
+        "code": 4370,
+        "short_code": "QGE",
+        "teacher": "Hugo",
+        "class": "IB",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/quimica-geral-experimental"
+    },
+    {
+        "id": 202,
+        "name": "Química Geral Experimental",
+        "code": 4370,
+        "short_code": "QGE",
+        "teacher": "Maraísa",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Sexta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/quimica-geral-experimental"
+    },
+    {
+        "id": 203,
+        "name": "Química Geral Experimental",
+        "code": 4370,
+        "short_code": "QGE",
+        "teacher": "Maraísa",
+        "class": "NB",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/quimica-geral-experimental"
+    },
+    {
+        "id": 204,
+        "name": "Química Orgânica Experimental",
+        "code": 4536,
+        "short_code": "QOE",
+        "teacher": "Joao Batista",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quarta",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/quimica-organica-experimental"
+    },
+    {
+        "id": 205,
+        "name": "Reciclagem de Materiais",
+        "code": 6674,
+        "short_code": "RM",
+        "teacher": "Lilia",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/reciclagem-materiais"
+    },
+    {
+        "id": 206,
+        "name": "Redes de Computadores",
+        "code": 2617,
+        "short_code": "RC",
+        "teacher": "Kimura",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/redes-computadores"
+    },
+    {
+        "id": 207,
+        "name": "Redes de Computadores",
+        "code": 2617,
+        "short_code": "RC",
+        "teacher": "Arlindo",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/redes-computadores"
+    },
+    {
+        "id": 208,
+        "name": "Reologia dos Materiais",
+        "code": 5785,
+        "short_code": "REOM",
+        "teacher": "Lilia",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/reologia-materiais"
+    },
+    {
+        "id": 209,
+        "name": "RPVMM II",
+        "code": 10002,
+        "short_code": "R",
+        "teacher": "Horácio",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": ""
+    },
+    {
+        "id": 210,
+        "name": "RPVMM II",
+        "code": 10003,
+        "short_code": "R",
+        "teacher": "Leduíno",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": ""
+    },
+    {
+        "id": 211,
+        "name": "Segurança da Informação",
+        "code": 8288,
+        "short_code": "SI",
+        "teacher": "Cappabianco",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/seguranca-informacao"
+    },
+    {
+        "id": 212,
+        "name": "Seleção de Materiais",
+        "code": 9799,
+        "short_code": "SELMAT",
+        "teacher": "Quinteiro",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/selecao-materiais"
+    },
+    {
+        "id": 213,
+        "name": "Seleção de Materiais",
+        "code": 9799,
+        "short_code": "SELMAT",
+        "teacher": "Quinteiro",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/selecao-materiais"
+    },
+    {
+        "id": 214,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Angelo",
+        "class": "IA",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 215,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Angelo",
+        "class": "IB",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 216,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Castilho",
+        "class": "IC",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 217,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Gama",
+        "class": "ID",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 218,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Gama",
+        "class": "IE",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 219,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Daniela Oliveira",
+        "class": "NA",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 220,
+        "name": "Séries e Equações Diferenciais Ordinárias",
+        "code": 4328,
+        "short_code": "SEDO",
+        "teacher": "Castilho",
+        "class": "NB",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/series-equacoes-diferenciais-ordinarias"
+    },
+    {
+        "id": 221,
+        "name": "Sistemas Embarcados",
+        "code": 6033,
+        "short_code": "SE",
+        "teacher": "Fernanda",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/sistemas-embarcados"
+    },
+    {
+        "id": 222,
+        "name": "Sistemas Embarcados",
+        "code": 6033,
+        "short_code": "SE",
+        "teacher": "Aoki",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/sistemas-embarcados"
+    },
+    {
+        "id": 223,
+        "name": "Sistemas Mecânicos",
+        "code": 5398,
+        "short_code": "SM",
+        "teacher": "Kunkel",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/sistemas-mecanicos"
+    },
+    {
+        "id": 224,
+        "name": "Sistemas Mecânicos",
+        "code": 5398,
+        "short_code": "SM",
+        "teacher": "Kunkel",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/sistemas-mecanicos"
+    },
+    {
+        "id": 235,
+        "name": "Tecnologia de Tintas e Vernizes",
+        "code": 5782,
+        "short_code": "TECTV",
+        "teacher": "Maurício",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Quarta",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/tecnologia-tintas-vernizes"
+    },
+    {
+        "id": 236,
+        "name": "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA",
+        "code": 6072,
+        "short_code": "TSPEC",
+        "teacher": "Evandro",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/tecnologia-social-praxis-e-contra-hegemonia"
+    },
+    {
+        "id": 237,
+        "name": "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA",
+        "code": 6072,
+        "short_code": "TSPEC",
+        "teacher": "Evandro",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/tecnologia-social-praxis-e-contra-hegemonia"
+    },
+    {
+        "id": 238,
+        "name": "Teoria de Grafos",
+        "code": 2975,
+        "short_code": "TG",
+        "teacher": "Luis Pereira",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/teoria-grafos"
+    },
+    {
+        "id": 239,
+        "name": "Teoria dos Números e Criptografia",
+        "code": 4406,
+        "short_code": "TNC",
+        "teacher": "Grasiele",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/teoria-numeros-criptografia"
+    },
+    {
+        "id": 240,
+        "name": "Teoria dos Números e Criptografia",
+        "code": 4406,
+        "short_code": "TNC",
+        "teacher": "Robson",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Sexta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/teoria-numeros-criptografia"
+    },
+    {
+        "id": 241,
+        "name": "Termodinâmica dos Sólidos",
+        "code": 5401,
+        "short_code": "TS",
+        "teacher": "Gisele",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "BCT-I",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/termodinamica-solidos"
+    },
+    {
+        "id": 242,
+        "name": "Termodinâmica dos Sólidos",
+        "code": 5401,
+        "short_code": "TS",
+        "teacher": "Capella",
+        "class": "N",
+        "hours": [
+            "21h00 - 23h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/termodinamica-solidos"
+    },
+    {
+        "id": 243,
+        "name": "Termodinâmica Química",
+        "code": 4773,
+        "short_code": "TQ",
+        "teacher": "Sílvia",
+        "class": "I",
+        "hours": [
+            "15h30 - 17h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-I",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/termodinamica-quimica"
+    },
+    {
+        "id": 244,
+        "name": "Termodinâmica Química",
+        "code": 4773,
+        "short_code": "TQ",
+        "teacher": "Sílvia",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "BCT-N",
+        "term": "4",
+        "description_url": "https://ajudauni.com/subject/termodinamica-quimica"
+    },
+    {
+        "id": 247,
+        "name": "Tópicos Interdisciplinares em Computação V (Neurociência Computacional)",
+        "code": 10001,
+        "short_code": "TIC(C",
+        "teacher": "Elbert",
+        "class": "I",
+        "hours": [
+            "08h00 - 10h00",
+            "08h00 - 10h00"
+        ],
+        "days": [
+            "Segunda",
+            "Quarta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": ""
+    },
+    {
+        "id": 248,
+        "name": "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)",
+        "code": 10004,
+        "short_code": "TICV(D",
+        "teacher": "Sílvia",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": ""
+    },
+    {
+        "id": 249,
+        "name": "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)",
+        "code": 10005,
+        "short_code": "TICV(D",
+        "teacher": "Sílvia",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00"
+        ],
+        "days": [
+            "Quinta"
+        ],
+        "course": "CFE-N",
+        "term": "8",
+        "description_url": ""
+    },
+    {
+        "id": 250,
+        "name": "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados)",
+        "code": 10013,
+        "short_code": "TICV(C",
+        "teacher": "Márcio",
+        "class": "I",
+        "hours": [
+            "10h00 - 12h00",
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça",
+            "Quinta"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": ""
+    },
+    {
+        "id": 251,
+        "name": "Tratamentos Térmicos",
+        "code": 5876,
+        "short_code": "TRATER",
+        "teacher": "Capella",
+        "class": "I",
+        "hours": [
+            "13h30 - 15h30",
+            "15h30 - 17h30"
+        ],
+        "days": [
+            "Segunda",
+            "Segunda"
+        ],
+        "course": "CFE-I",
+        "term": "8",
+        "description_url": "https://ajudauni.com/subject/tratamentos-termicos"
+    },
+    {
+        "id": 252,
+        "name": "Vidros, Vitrocerâmicos e Vidrados",
+        "code": 5402,
+        "short_code": "VVV",
+        "teacher": "Eliandra",
+        "class": "N",
+        "hours": [
+            "19h00 - 21h00",
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Quinta",
+            "Quinta"
+        ],
+        "course": "BCT-N",
+        "term": "6",
+        "description_url": "https://ajudauni.com/subject/vidros-vitroceramicos-e-vidrados"
+    },
+    {
+        "id": 253,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Raiane",
+        "class": "IE",
+        "hours": [
+            "10h00 - 12h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 254,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Raiane",
+        "class": "IF",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 255,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Raiane",
+        "class": "IG",
+        "hours": [
+            "13h30 - 15h30"
+        ],
+        "days": [
+            "Sexta"
+        ],
+        "course": "BCT-I",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
+    {
+        "id": 256,
+        "name": "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)",
+        "code": 5870,
+        "short_code": "CTSA",
+        "teacher": "Raiane",
+        "class": "NC",
+        "hours": [
+            "21h00 - 23h00"
+        ],
+        "days": [
+            "Terça"
+        ],
+        "course": "BCT-N",
+        "term": "2",
+        "description_url": "https://ajudauni.com/subject/ciencia-tecnologia-sociedad-ambiente"
+    },
 
-    { id: 19, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "13h30" },
-    { id: 20, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IA", professor: "Hugo", dia: "Sexta-feira", horario: "15h30" },
-    { id: 21, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "13h30" },
-    { id: 22, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "IB", professor: "Hugo", dia: "Terça-feira", horario: "15h30" },
-    { id: 23, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "19h00" },
-    { id: 24, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NA", professor: "Maraisa", dia: "Sexta-feira", horario: "21h00" },
-    { id: 25, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "19h00" },
-    { id: 26, termo: "Termo 2", codigo: "4370", nome: "Química Geral Experimental", turma: "NB", professor: "Maraisa", dia: "Terça-feira", horario: "21h00" },
-
-    { id: 27, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Segunda-feira", horario: "13h30" },
-    { id: 28, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IA", professor: "Angelo", dia: "Quarta-feira", horario: "13h30" },
-    { id: 29, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IB", professor: "Angelo", dia: "Segunda-feira", horario: "15h30" },
-    { id: 30, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IB", professor: "Angelo", dia: "Quarta-feira", horario: "15h30" },
-    { id: 31, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Terça-feira", horario: "15h30" },
-    { id: 32, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IC", professor: "Castilho", dia: "Quinta-feira", horario: "15h30" },
-    { id: 408, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Segunda-feira", horario: "13h30" },
-    { id: 409, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "ID", professor: "Gama", dia: "Quarta-feira", horario: "13h30" },
-    { id: 410, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Segunda-feira", horario: "15h30" },
-    { id: 449, termo: "Termo 6", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "IE", professor: "Gama", dia: "Quarta-feira", horario: "15h30" },
-    { id: 33, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Terça-feira", horario: "19h00" },
-    { id: 34, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NB", professor: "Castilho", dia: "Quinta-feira", horario: "19h00" },
-    { id: 35, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Segunda-feira", horario: "19h00" },
-    { id: 36, termo: "Termo 2", codigo: "4328", nome: "Séries e Equações Diferenciais Ordinárias", turma: "NA", professor: "Daniela Oliveira", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 37, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IA", professor: "Renato", dia: "Segunda-feira", horario: "13h30" },
-    { id: 38, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IA", professor: "Renato", dia: "Quarta-feira", horario: "13h30" },
-    { id: 39, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IB", professor: "Renato", dia: "Segunda-feira", horario: "15h30" },
-    { id: 40, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IB", professor: "Renato", dia: "Quarta-feira", horario: "15h30" },
-    { id: 41, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IC", professor: "Vanessa", dia: "Terça-feira", horario: "08h00" },
-    { id: 42, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "IC", professor: "Vanessa", dia: "Quinta-feira", horario: "08h00" },
-    { id: 43, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "NA", professor: "AnaMoreira", dia: "Terça-feira", horario: "19h00" },
-    { id: 44, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "NA", professor: "AnaMoreira", dia: "Quinta-feira", horario: "19h00" },
-    { id: 45, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "NB", professor: "Thadeu", dia: "Terça-feira", horario: "21h00" },
-    { id: 46, termo: "Termo 2", codigo: "2650", nome: "Geometria Analítica", turma: "NB", professor: "Thadeu", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 47, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IA", professor: "Erwin", dia: "Terça-feira", horario: "15h30" },
-    { id: 48, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IA", professor: "Erwin", dia: "Sexta-feira", horario: "13h30" },
-    { id: 49, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IB", professor: "Erwin", dia: "Terça-feira", horario: "13h30" },
-    { id: 50, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IB", professor: "Erwin", dia: "Quinta-feira", horario: "13h30" },
-    { id: 51, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IC", professor: "Felipe", dia: "Quarta-feira", horario: "08h00" },
-    { id: 52, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "IC", professor: "Felipe", dia: "Sexta-feira", horario: "08h00" },
-    { id: 53, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "NA", professor: "Robson", dia: "Terça-feira", horario: "21h00" },
-    { id: 54, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "NA", professor: "Robson", dia: "Sexta-feira", horario: "19h00" },
-    { id: 55, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "NB", professor: "Macedo", dia: "Quinta-feira", horario: "21h00" },
-    { id: 56, termo: "Termo 2", codigo: "2201", nome: "Matemática Discreta", turma: "NB", professor: "Macedo", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 57, termo: "Termo 2", codigo: "5844", nome: "Matemática Geral", turma: "I", professor: "Karen", dia: "Segunda-feira", horario: "15h30" },
-    { id: 58, termo: "Termo 2", codigo: "5844", nome: "Matemática Geral", turma: "I", professor: "Karen", dia: "Quarta-feira", horario: "15h30" },
-    { id: 59, termo: "Termo 2", codigo: "5844", nome: "Matemática Geral", turma: "N", professor: "Daniela Oliveira", dia: "Segunda-feira", horario: "21h00" },
-    { id: 60, termo: "Termo 2", codigo: "5844", nome: "Matemática Geral", turma: "N", professor: "Daniela Oliveira", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 61, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "IA", professor: "Regina", dia: "Quinta-feira", horario: "15h30" },
-    { id: 62, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "IA", professor: "Regina", dia: "Sexta-feira", horario: "15h30" },
-    { id: 63, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "IB", professor: "Arlindo", dia: "Terça-feira", horario: "13h30" },
-    { id: 64, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "IB", professor: "Arlindo", dia: "Quinta-feira", horario: "13h30" },
-    { id: 65, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "NA", professor: "Regina", dia: "Quinta-feira", horario: "21h00" },
-    { id: 66, termo: "Termo 2", codigo: "2832", nome: "Algoritmos e Estruturas de Dados I", turma: "NA", professor: "Regina", dia: "Sexta-feira", horario: "21h00" },
-    { id: 67, termo: "Termo 2", codigo: "2852", nome: "Algoritmos e Estruturas de Dados I", turma: "NB", professor: "Luis", dia: "Segunda-feira", horario: "21h00" },
-    { id: 68, termo: "Termo 2", codigo: "2852", nome: "Algoritmos e Estruturas de Dados I", turma: "NB", professor: "Luis", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 69, termo: "Termo 2", codigo: "5542", nome: "Bioquímica I", turma: "I", professor: "Martin", dia: "Quinta-feira", horario: "15h30" },
-    { id: 70, termo: "Termo 2", codigo: "5542", nome: "Bioquímica I", turma: "I", professor: "Martin", dia: "Sexta-feira", horario: "15h30" },
-    { id: 71, termo: "Termo 2", codigo: "5842", nome: "Bioquímica I", turma: "N", professor: "Martin", dia: "Quinta-feira", horario: "21h00" },
-    { id: 72, termo: "Termo 2", codigo: "5842", nome: "Bioquímica I", turma: "N", professor: "Martin", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 73, termo: "Termo 2", codigo: "5843", nome: "Biologia Molecular do Gene", turma: "I", professor: "Luciane", dia: "Terça-feira", horario: "15h30" },
-    { id: 74, termo: "Termo 2", codigo: "5843", nome: "Biologia Molecular do Gene", turma: "I", professor: "Luciane", dia: "Sexta-feira", horario: "13h30" },
-    { id: 75, termo: "Termo 2", codigo: "5843", nome: "Biologia Molecular do Gene", turma: "N", professor: "Luciane", dia: "Terça-feira", horario: "21h00" },
-    { id: 76, termo: "Termo 2", codigo: "5843", nome: "Biologia Molecular do Gene", turma: "N", professor: "Luciane", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 77, termo: "Termo 2", codigo: "5120", nome: "Microbiologia Geral", turma: "I", professor: "Elisa", dia: "Segunda-feira", horario: "13h30" },
-    { id: 78, termo: "Termo 2", codigo: "5120", nome: "Microbiologia Geral", turma: "I", professor: "Elisa", dia: "Quarta-feira", horario: "13h30" },
-    { id: 79, termo: "Termo 2", codigo: "5120", nome: "Microbiologia Geral", turma: "N", professor: "Fernando", dia: "Terça-feira", horario: "19h00" },
-    { id: 80, termo: "Termo 2", codigo: "5120", nome: "Microbiologia Geral", turma: "N", professor: "Fernando", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 81, termo: "Termo 2", codigo: "4760", nome: "Introdução a Biotecnologia", turma: "I", professor: "Dayane", dia: "Sexta-feira", horario: "10h00" },
-    { id: 82, termo: "Termo 2", codigo: "4760", nome: "Introdução a Biotecnologia", turma: "N", professor: "Dayane", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 83, termo: "Termo 2", codigo: "4373", nome: "Introdução à Engenharia de Materiais", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "13h30" },
-    { id: 84, termo: "Termo 2", codigo: "4373", nome: "Introdução à Engenharia de Materiais", turma: "N", professor: "Albers", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 85, termo: "Termo 2", codigo: "5124", nome: "Anatomia", turma: "I", professor: "Fernando", dia: "Terça-feira", horario: "13h30" },
-    { id: 86, termo: "Termo 2", codigo: "5124", nome: "Anatomia", turma: "N", professor: "Fernando", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 87, termo: "Termo 2", codigo: "5900", nome: "Desenho Técnico Básico", turma: "IA", professor: "Shida", dia: "Terça-feira", horario: "15h30" },
-    { id: 88, termo: "Termo 2", codigo: "5900", nome: "Desenho Técnico Básico", turma: "IB", professor: "Shida", dia: "Quinta-feira", horario: "13h30" },
-    { id: 89, termo: "Termo 2", codigo: "5900", nome: "Desenho Técnico Básico", turma: "NA", professor: "Shida", dia: "Terça-feira", horario: "19h00" },
-    { id: 90, termo: "Termo 2", codigo: "5900", nome: "Desenho Técnico Básico", turma: "NB", professor: "Shida", dia: "Terça-feira", horario: "21h00" },
-
-    // TERMO 4
-    { id: 91, termo: "Termo 4", codigo: "4770", nome: "Mecânica Geral", turma: "I", professor: "Eudes", dia: "Terça-feira", horario: "13h30" },
-    { id: 92, termo: "Termo 4", codigo: "4770", nome: "Mecânica Geral", turma: "I", professor: "Eudes", dia: "Quinta-feira", horario: "13h30" },
-    { id: 93, termo: "Termo 4", codigo: "4770", nome: "Mecânica Geral", turma: "N", professor: "Eudes", dia: "Terça-feira", horario: "19h00" },
-    { id: 94, termo: "Termo 4", codigo: "4770", nome: "Mecânica Geral", turma: "N", professor: "Eudes", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 95, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "IA", professor: "Kelly", dia: "Terça-feira", horario: "10h00" },
-    { id: 96, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "IA", professor: "Kelly", dia: "Quinta-feira", horario: "10h00" },
-    { id: 97, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "IB", professor: "Kelly", dia: "Terça-feira", horario: "08h00" },
-    { id: 98, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "IB", professor: "Kelly", dia: "Quinta-feira", horario: "08h00" },
-    { id: 99, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "NA", professor: "Nirton", dia: "Segunda-feira", horario: "19h00" },
-    { id: 100, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "NA", professor: "Nirton", dia: "Quarta-feira", horario: "19h00" },
-    { id: 101, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "NB", professor: "Nirton", dia: "Segunda-feira", horario: "21h00" },
-    { id: 102, termo: "Termo 4", codigo: "4748", nome: "Fenômenos Eletromagnéticos", turma: "NB", professor: "Nirton", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 103, termo: "Termo 4", codigo: "5364", nome: "Fenômenos do Continuo Experimental", turma: "I", professor: "Fabiano", dia: "Quinta-feira", horario: "15h30" },
-    { id: 104, termo: "Termo 4", codigo: "5364", nome: "Fenômenos do Continuo Experimental", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "19h00" },
-
-    { id: 105, termo: "Termo 4", codigo: "4773", nome: "Termodinâmica Química", turma: "I", professor: "Silvia", dia: "Segunda-feira", horario: "15h30" },
-    { id: 106, termo: "Termo 4", codigo: "4773", nome: "Termodinâmica Química", turma: "I", professor: "Silvia", dia: "Quarta-feira", horario: "15h30" },
-    { id: 107, termo: "Termo 4", codigo: "4773", nome: "Termodinâmica Química", turma: "N", professor: "Silvia", dia: "Segunda-feira", horario: "19h00" },
-    { id: 108, termo: "Termo 4", codigo: "4773", nome: "Termodinâmica Química", turma: "N", professor: "Silvia", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 109, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "IA", professor: "Felipe", dia: "Quarta-feira", horario: "10h00" },
-    { id: 110, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "IA", professor: "Felipe", dia: "Sexta-feira", horario: "10h00" },
-    { id: 111, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "IB", professor: "Lobosco", dia: "Segunda-feira", horario: "13h30" },
-    { id: 112, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "IB", professor: "Lobosco", dia: "Quarta-feira", horario: "13h30" },
-    { id: 113, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "NA", professor: "Leduino", dia: "Terça-feira", horario: "21h00" },
-    { id: 114, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "NA", professor: "Leduino", dia: "Sexta-feira", horario: "19h00" },
-    { id: 115, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "NB", professor: "Lobosco", dia: "Segunda-feira", horario: "19h00" },
-    { id: 116, termo: "Termo 4", codigo: "2828", nome: "Cálculo Numérico", turma: "NB", professor: "Lobosco", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 117, termo: "Termo 4", codigo: "3163", nome: "Probabilidade", turma: "I", professor: "Samia", dia: "Segunda-feira", horario: "15h30" },
-    { id: 118, termo: "Termo 4", codigo: "3163", nome: "Probabilidade", turma: "I", professor: "Samia", dia: "Quarta-feira", horario: "15h30" },
-    { id: 119, termo: "Termo 4", codigo: "3163", nome: "Probabilidade", turma: "N", professor: "Samia", dia: "Segunda-feira", horario: "21h00" },
-    { id: 120, termo: "Termo 4", codigo: "3163", nome: "Probabilidade", turma: "N", professor: "Samia", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 121, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "I", professor: "Leandro", dia: "Quarta-feira", horario: "08h00" },
-    { id: 122, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "I", professor: "Leandro", dia: "Sexta-feira", horario: "08h00" },
-    { id: 123, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "N", professor: "AnaMoreira", dia: "Terça-feira", horario: "21h00" },
-    { id: 124, termo: "Termo 4", codigo: "3584", nome: "Funções Analíticas", turma: "N", professor: "AnaMoreira", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 126, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "I", professor: "Grasiele", dia: "Terça-Feira", horario: "15h30" },
-    { id: 125, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "I", professor: "Grasiele", dia: "Quinta-feira", horario: "15h30" },
-    { id: 127, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "N", professor: "Robson", dia: "Quinta-feira", horario: "21h00" },
-    { id: 128, termo: "Termo 4", codigo: "4406", nome: "Teoria dos Números e Criptografia", turma: "N", professor: "Robson", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 129, termo: "Termo 4", codigo: "2831", nome: "Banco de Dados", turma: "I", professor: "Musa", dia: "Quinta-feira", horario: "15h30" },
-    { id: 130, termo: "Termo 4", codigo: "2831", nome: "Banco de Dados", turma: "I", professor: "Musa", dia: "Sexta-feira", horario: "15h30" },
-    { id: 131, termo: "Termo 4", codigo: "2831", nome: "Banco de Dados", turma: "N", professor: "Musa", dia: "Quinta-feira", horario: "21h00" },
-    { id: 132, termo: "Termo 4", codigo: "2831", nome: "Banco de Dados", turma: "N", professor: "Musa", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 133, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "IA", professor: "Sanderson", dia: "Terça-feira", horario: "13h30" },
-    { id: 134, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "IA", professor: "Sanderson", dia: "Quinta-feira", horario: "13h30" },
-    { id: 135, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "IB", professor: "Reginaldo", dia: "Terça-feira", horario: "13h30" },
-    { id: 136, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "IB", professor: "Reginaldo", dia: "Quinta-feira", horario: "13h30" },
-    { id: 137, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "N", professor: "Reginaldo", dia: "Terça-feira", horario: "19h00" },
-    { id: 138, termo: "Termo 4", codigo: "3579", nome: "Projeto e Análise de Algoritmos", turma: "N", professor: "Reginaldo", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 139, termo: "Termo 4", codigo: "2471", nome: "Programação Orientada a Objetos", turma: "T", professor: "Otavio", dia: "Segunda-feira", horario: "15h30" },
-    { id: 140, termo: "Termo 4", codigo: "2471", nome: "Programação Orientada a Objetos", turma: "T", professor: "Otavio", dia: "Quarta-feira", horario: "15h30" },
-    { id: 141, termo: "Termo 4", codigo: "2471", nome: "Programação Orientada a Objetos", turma: "N", professor: "Rodrigo", dia: "Terça-feira", horario: "21h00" },
-    { id: 142, termo: "Termo 4", codigo: "2471", nome: "Programação Orientada a Objetos", turma: "N", professor: "Rodrigo", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 143, termo: "Termo 4", codigo: "3519", nome: "Arquitetura e organização de Computadores", turma: "I", professor: "Cappabianco", dia: "Terça-feira", horario: "15h30" },
-    { id: 144, termo: "Termo 4", codigo: "3519", nome: "Arquitetura e organização de Computadores", turma: "I", professor: "Cappabianco", dia: "Sexta-feira", horario: "13h30" },
-    { id: 145, termo: "Termo 4", codigo: "3518", nome: "Arquitetura e organização de Computadores", turma: "N", professor: "Denise", dia: "Segunda-feira", horario: "21h00" },
-    { id: 146, termo: "Termo 4", codigo: "3518", nome: "Arquitetura e organização de Computadores", turma: "N", professor: "Denise", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 147, termo: "Termo 4", codigo: "5928", nome: "Lab. De Sistemas Computacionais (Circuitos Digitais)", turma: "IA", professor: "Sérgio", dia: "Segunda-feira", horario: "13h30" },
-    { id: 148, termo: "Termo 4", codigo: "5928", nome: "Lab. De Sistemas Computacionais (Circuitos Digitais)", turma: "IB", professor: "Marcorin", dia: "Quinta-feira", horario: "15h30" },
-    { id: 149, termo: "Termo 4", codigo: "5928", nome: "Lab. De Sistemas Computacionais (Circuitos Digitais)", turma: "N", professor: "Marcorin", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 150, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Segunda-feira", horario: "08h00" },
-    { id: 151, termo: "Termo 4", codigo: "8533", nome: "Métodos matemáticos para engenharia", turma: "I", professor: "Paiva", dia: "Sexta-feira", horario: "08h00" },
-
-    { id: 152, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Segunda-feira", horario: "13h30" },
-    { id: 153, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IA", professor: "Henrique", dia: "Quarta-feira", horario: "13h30" },
-    { id: 154, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IB", professor: "Henrique", dia: "Segunda-feira", horario: "15h30" },
-    { id: 155, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "IB", professor: "Henrique", dia: "Quarta-feira", horario: "15h30" },
-    { id: 156, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "N", professor: "Edson", dia: "Quinta-feira", horario: "21h00" },
-    { id: 157, termo: "Termo 4", codigo: "5902", nome: "Circuitos Elétricos I", turma: "N", professor: "Edson", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 158, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IA", professor: "Tatiana", dia: "Segunda-feira", horario: "13h30" },
-    { id: 159, termo: "Termo 4", codigo: "8272", nome: "Fisiologia Humana II", turma: "IA", professor: "Tatiana", dia: "Quarta-feira", horario: "13h30" },
-    { id: 162, termo: "Termo 4", codigo: "1272", nome: "Fisiologia Humana II", turma: "N", professor: "Flavio", dia: "Segunda-feira", horario: "21h00" },
-    { id: 163, termo: "Termo 4", codigo: "1272", nome: "Fisiologia Humana II", turma: "N", professor: "Flavio", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 164, termo: "Termo 4", codigo: "4764", nome: "Ciência e Tecnologia dos Materiais", turma: "I", professor: "Gisele", dia: "Terça-feira", horario: "15h30" },
-    { id: 165, termo: "Termo 4", codigo: "4764", nome: "Ciência e Tecnologia dos Materiais", turma: "I", professor: "Gisele", dia: "Quinta-feira", horario: "15h30" },
-    { id: 166, termo: "Termo 4", codigo: "4764", nome: "Ciência e Tecnologia dos Materiais", turma: "N", professor: "Leonardo", dia: "Segunda-feira", horario: "19h00" },
-    { id: 167, termo: "Termo 4", codigo: "4764", nome: "Ciência e Tecnologia dos Materiais", turma: "N", professor: "Leonardo", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 168, termo: "Termo 4", codigo: "5119", nome: "Fundamentos da Eng. Bioquímica", turma: "I", professor: "Saraiva", dia: "Terça-feira", horario: "13h30" },
-    { id: 169, termo: "Termo 4", codigo: "5119", nome: "Fundamentos da Eng. Bioquímica", turma: "I", professor: "Saraiva", dia: "Quinta-feira", horario: "13h30" },
-    { id: 170, termo: "Termo 4", codigo: "5119", nome: "Fundamentos da Eng. Bioquímica", turma: "N", professor: "Elisabeth", dia: "Terça-feira", horario: "19h00" },
-    { id: 171, termo: "Termo 4", codigo: "5119", nome: "Fundamentos da Eng. Bioquímica", turma: "N", professor: "Elisabeth", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 172, termo: "Termo 4", codigo: "5740", nome: "Biologia Geral", turma: "I", professor: "Villaverde", dia: "Terça-feira", horario: "10h00" },
-    { id: 173, termo: "Termo 4", codigo: "5740", nome: "Biologia Geral", turma: "I", professor: "Villaverde", dia: "Quinta-feira", horario: "10h00" },
-    { id: 174, termo: "Termo 4", codigo: "5740", nome: "Biologia Geral", turma: "N", professor: "Michael", dia: "Segunda-feira", horario: "19h00" },
-    { id: 175, termo: "Termo 4", codigo: "5740", nome: "Biologia Geral", turma: "N", professor: "Michael", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 176, termo: "Termo 4", codigo: "5847", nome: "Bioquímica II", turma: "I", professor: "Conceição", dia: "Terça-feira", horario: "15h30" },
-    { id: 177, termo: "Termo 4", codigo: "5847", nome: "Bioquímica II", turma: "I", professor: "Conceição", dia: "Quinta-feira", horario: "15h30" },
-    { id: 178, termo: "Termo 4", codigo: "5847", nome: "Bioquímica II", turma: "N", professor: "Conceição", dia: "Terça-feira", horario: "21h00" },
-    { id: 179, termo: "Termo 4", codigo: "5847", nome: "Bioquímica II", turma: "N", professor: "Conceição", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 180, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "I", professor: "Claudia", dia: "Sexta-feira", horario: "13h30" },
-    { id: 181, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "I", professor: "Claudia", dia: "Sexta-feira", horario: "15h30" },
-    { id: 182, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "N", professor: "Claudia", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 183, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "I", professor: "Elisa", dia: "Quarta-feira", horario: "15h30" },
-    { id: 185, termo: "Termo 4", codigo: "5848", nome: "Laboratório de Microbiologia", turma: "N", professor: "Elisa", dia: "Quarta-feira", horario: "19h00" },
-
-    // TERMO 5
-    { id: 187, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "IA", professor: "Scriptore", dia: "Terça-feira", horario: "08h00" },
-    { id: 188, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "IB", professor: "Scriptore", dia: "Terça-feira", horario: "10h00" },
-    { id: 189, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "NA", professor: "Scriptore", dia: "Quinta-feira", horario: "19h00" },
-    { id: 190, termo: "Termo 5", codigo: "9793", nome: "Introdução à Economia", turma: "NB", professor: "Scriptore", dia: "Quinta-feira", horario: "21h00" },
-
-    // TERMO 6
-    { id: 191, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "I", professor: "Kunkel", dia: "Quinta-feira", horario: "13h30" },
-    { id: 192, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "I", professor: "Kunkel", dia: "Quinta-feira", horario: "15h30" },
-    { id: 193, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "N", professor: "Kunkel", dia: "Terça-feira", horario: "19h00" },
-    { id: 194, termo: "Termo 6", codigo: "5398", nome: "Sistemas Mecânicos", turma: "N", professor: "Kunkel", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 195, termo: "Termo 6", codigo: "5930", nome: "Laboratório de Eletrônica Digital", turma: "IA", professor: "Karina", dia: "Terça-feira", horario: "13h30" },
-    { id: 196, termo: "Termo 6", codigo: "5930", nome: "Laboratório de Eletrônica Digital", turma: "IB", professor: "Karina", dia: "Sexta-feira", horario: "15h30" },
-    { id: 197, termo: "Termo 6", codigo: "5930", nome: "Laboratório de Eletrônica Digital", turma: "IC", professor: "Gurjão", dia: "Quarta-feira", horario: "10h00" },
-    { id: 198, termo: "Termo 6", codigo: "5930", nome: "Laboratório de Eletrônica Digital", turma: "NA", professor: "Karina", dia: "Quinta-feira", horario: "19h00" },
-    { id: 199, termo: "Termo 6", codigo: "5930", nome: "Laboratório de Eletrônica Digital", turma: "NB", professor: "Karina", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 200, termo: "Termo 6", codigo: "8218", nome: "Processamento de Sinais", turma: "I", professor: "Martini", dia: "Quarta-feira", horario: "15h30" },
-    { id: 201, termo: "Termo 6", codigo: "8218", nome: "Processamento de Sinais", turma: "N", professor: "Martini", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 202, termo: "Termo 6", codigo: "8521", nome: "Eletrônica", turma: "T", professor: "Gurjão", dia: "Segunda-feira", horario: "13h30" },
-    { id: 203, termo: "Termo 6", codigo: "8521", nome: "Eletrônica", turma: "T", professor: "Gurjão", dia: "Quarta-feira", horario: "13h30" },
-    { id: 204, termo: "Termo 6", codigo: "8521", nome: "Eletrônica", turma: "N", professor: "Aoki", dia: "Terça-feira", horario: "21h00" },
-    { id: 205, termo: "Termo 6", codigo: "8521", nome: "Eletrônica", turma: "N", professor: "Aoki", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 206, termo: "Termo 6", codigo: "5453", nome: "Introdução à Eletrotécnica", turma: "I", professor: "Fabiano", dia: "Quinta-feira", horario: "13h30" },
-    { id: 207, termo: "Termo 6", codigo: "5453", nome: "Introdução à Eletrotécnica", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "21h00" },
-
-    { id: 208, termo: "Termo 6", codigo: "5401", nome: "Termodinâmica dos Sólidos", turma: "I", professor: "Gisele", dia: "Terça-feira", horario: "13h30" },
-    { id: 209, termo: "Termo 6", codigo: "5401", nome: "Termodinâmica dos Sólidos", turma: "I", professor: "Gisele", dia: "Quinta-feira", horario: "13h30" },
-    { id: 210, termo: "Termo 6", codigo: "5401", nome: "Termodinâmica dos Sólidos", turma: "N", professor: "Capella", dia: "Segunda-feira", horario: "21h00" },
-    { id: 211, termo: "Termo 6", codigo: "5401", nome: "Termodinâmica dos Sólidos", turma: "N", professor: "Capella", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 212, termo: "Termo 6", codigo: "5387", nome: "Ensaio de Materiais", turma: "I", professor: "Dilermando", dia: "Sexta-feira", horario: "13h30" },
-    { id: 213, termo: "Termo 6", codigo: "5387", nome: "Ensaio de Materiais", turma: "I", professor: "Dilermando", dia: "Sexta-feira", horario: "15h30" },
-    { id: 214, termo: "Termo 6", codigo: "5387", nome: "Ensaio de Materiais", turma: "N", professor: "Dilermando", dia: "Terça-feira", horario: "19h00" },
-    { id: 215, termo: "Termo 6", codigo: "5387", nome: "Ensaio de Materiais", turma: "N", professor: "Dilermando", dia: "Terça-feira", horario: "21h00" },
-
-    { id: 216, termo: "Termo 6", codigo: "9799", nome: "Seleção de Materiais", turma: "I", professor: "Quinteiro", dia: "Segunda-feira", horario: "15h30" },
-    { id: 217, termo: "Termo 6", codigo: "9799", nome: "Seleção de Materiais", turma: "I", professor: "Quinteiro", dia: "Quarta-feira", horario: "15h30" },
-    { id: 218, termo: "Termo 6", codigo: "9799", nome: "Seleção de Materiais", turma: "N", professor: "Quinteiro", dia: "Segunda-feira", horario: "19h00" },
-    { id: 219, termo: "Termo 6", codigo: "9799", nome: "Seleção de Materiais", turma: "N", professor: "Quinteiro", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 220, termo: "Termo 6", codigo: "5373", nome: "Álgebra Linear II", turma: "I", professor: "Abbas", dia: "Terça-feira", horario: "13h30" },
-    { id: 221, termo: "Termo 6", codigo: "5373", nome: "Álgebra Linear II", turma: "I", professor: "Abbas", dia: "Quinta-feira", horario: "13h30" },
-    { id: 222, termo: "Termo 6", codigo: "5373", nome: "Álgebra Linear II", turma: "N", professor: "Macedo", dia: "Terça-feira", horario: "21h00" },
-    { id: 223, termo: "Termo 6", codigo: "5373", nome: "Álgebra Linear II", turma: "N", professor: "Macedo", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 224, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "I", professor: "Vanessa", dia: "Segunda-feira", horario: "15h30" },
-    { id: 225, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "I", professor: "Vanessa", dia: "Quarta-feira", horario: "15h30" },
-    { id: 226, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "N", professor: "Claudia Aline", dia: "Segunda-feira", horario: "21h00" },
-    { id: 227, termo: "Termo 6", codigo: "5918", nome: "Análise Real II", turma: "N", professor: "Claudia Aline", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 232, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "I", professor: "Luzia", dia: "Terça-feira", horario: "15h30" },
-    { id: 233, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "I", professor: "Luzia", dia: "Quinta-feira", horario: "15h30" },
-    { id: 234, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "N", professor: "Luzia", dia: "Terça-feira", horario: "19h00" },
-    { id: 235, termo: "Termo 6", codigo: "4401", nome: "Inferência e Análise de Regressão", turma: "N", professor: "Luzia", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 236, termo: "Termo 6", codigo: "2617", nome: "Redes de Computadores", turma: "I", professor: "Kimura", dia: "Terça-feira", horario: "13h30" },
-    { id: 237, termo: "Termo 6", codigo: "2617", nome: "Redes de Computadores", turma: "I", professor: "Kimura", dia: "Quinta-feira", horario: "13h30" },
-    { id: 238, termo: "Termo 6", codigo: "2617", nome: "Redes de Computadores", turma: "N", professor: "Arlindo", dia: "Terça-feira", horario: "19h00" },
-    { id: 239, termo: "Termo 6", codigo: "2617", nome: "Redes de Computadores", turma: "N", professor: "Arlindo", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 240, termo: "Termo 6", codigo: "2614", nome: "Engenharia de Software", turma: "I", professor: "Fabio", dia: "Terça-feira", horario: "10h00" },
-    { id: 241, termo: "Termo 6", codigo: "2614", nome: "Engenharia de Software", turma: "I", professor: "Fabio", dia: "Quinta-feira", horario: "10h00" },
-    { id: 242, termo: "Termo 6", codigo: "2614", nome: "Engenharia de Software", turma: "N", professor: "Otavio", dia: "Segunda-feira", horario: "21h00" },
-    { id: 243, termo: "Termo 6", codigo: "2614", nome: "Engenharia de Software", turma: "N", professor: "Otavio", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 244, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "I", professor: "Ana", dia: "Quinta-feira", horario: "15h30" },
-    { id: 245, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "I", professor: "Ana", dia: "Sexta-feira", horario: "15h30" },
-    { id: 246, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "N", professor: "Ana", dia: "Quinta-feira", horario: "21h00" },
-    { id: 247, termo: "Termo 6", codigo: "3051", nome: "Computação Gráfica", turma: "N", professor: "Ana", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 248, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "I", professor: "Alvaro", dia: "Segunda-feira", horario: "13h30" },
-    { id: 249, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "I", professor: "Alvaro", dia: "Quarta-feira", horario: "13h30" },
-    { id: 250, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "N", professor: "Denise", dia: "Segunda-feira", horario: "19h00" },
-    { id: 251, termo: "Termo 6", codigo: "3580", nome: "Programação Concorrente e Distribuída", turma: "N", professor: "Denise", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 252, termo: "Termo 6", codigo: "2615", nome: "Compiladores", turma: "I", professor: "Rodrigo", dia: "Terça-feira", horario: "15h30" },
-    { id: 253, termo: "Termo 6", codigo: "2615", nome: "Compiladores", turma: "I", professor: "Rodrigo", dia: "Sexta-feira", horario: "13h30" },
-    { id: 254, termo: "Termo 6", codigo: "2615", nome: "Compiladores", turma: "N", professor: "Galvão", dia: "Terça-feira", horario: "21h00" },
-    { id: 255, termo: "Termo 6", codigo: "2615", nome: "Compiladores", turma: "N", professor: "Galvão", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 256, termo: "Termo 6", codigo: "5386", nome: "Controle de Sistemas Dinâmicos", turma: "I", professor: "Paiva", dia: "Segunda-feira", horario: "10h00" },
-    { id: 257, termo: "Termo 6", codigo: "5386", nome: "Controle de Sistemas Dinâmicos", turma: "I", professor: "Paiva", dia: "Sexta-feira", horario: "10h00" },
-    { id: 258, termo: "Termo 6", codigo: "5386", nome: "Controle de Sistemas Dinâmicos", turma: "N", professor: "Sérgio", dia: "Segunda-feira", horario: "19h00" },
-    { id: 259, termo: "Termo 6", codigo: "5386", nome: "Controle de Sistemas Dinâmicos", turma: "N", professor: "Sérgio", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 260, termo: "Termo 6", codigo: "9803", nome: "Fundamentos de Eletrônica Aplicada", turma: "I", professor: "Fernanda", dia: "Segunda-feira", horario: "15h30" },
-    { id: 261, termo: "Termo 6", codigo: "9803", nome: "Fundamentos de Eletrônica Aplicada", turma: "N", professor: "Fernanda", dia: "Segunda-feira", horario: "19h00" },
-
-    { id: 262, termo: "Termo 6", codigo: "6095", nome: "Laboratório de Sistemas Computacionais - Eng. de Si", turma: "I", professor: "Silva", dia: "Quarta-feira", horario: "15h30" },
-    { id: 263, termo: "Termo 6", codigo: "6095", nome: "Laboratório de Sistemas Computacionais - Eng. de Si", turma: "N", professor: "Silva", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 264, termo: "Termo 6", codigo: "5851", nome: "Engenharia Bioquímica II", turma: "I", professor: "Elisabeth", dia: "Terça-feira", horario: "13h30" },
-    { id: 265, termo: "Termo 6", codigo: "5851", nome: "Engenharia Bioquímica II", turma: "I", professor: "Elisabeth", dia: "Quinta-feira", horario: "13h30" },
-
-    { id: 266, termo: "Termo 6", codigo: "5390", nome: "Introdução à Biologia de Sistemas", turma: "I", professor: "André", dia: "Segunda-feira", horario: "15h30" },
-    { id: 267, termo: "Termo 6", codigo: "5390", nome: "Introdução à Biologia de Sistemas", turma: "I", professor: "André", dia: "Quarta-feira", horario: "15h30" },
-    { id: 268, termo: "Termo 6", codigo: "5390", nome: "Introdução à Biologia de Sistemas", turma: "N", professor: "André", dia: "Segunda-feira", horario: "19h00" },
-    { id: 269, termo: "Termo 6", codigo: "5390", nome: "Introdução à Biologia de Sistemas", turma: "N", professor: "André", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 270, termo: "Termo 6", codigo: "5857", nome: "Biotecnologia Ambiental I", turma: "I", professor: "Danielle", dia: "Terça-feira", horario: "15h30" },
-    { id: 271, termo: "Termo 6", codigo: "5857", nome: "Biotecnologia Ambiental I", turma: "I", professor: "Danielle", dia: "Quinta-feira", horario: "15h30" },
-    { id: 272, termo: "Termo 6", codigo: "5857", nome: "Biotecnologia Ambiental I", turma: "N", professor: "Danielle", dia: "Terça-feira", horario: "19h00" },
-    { id: 273, termo: "Termo 6", codigo: "5857", nome: "Biotecnologia Ambiental I", turma: "N", professor: "Danielle", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 274, termo: "Termo 6", codigo: "5850", nome: "Laboratório de Bioquímica Analítica", turma: "I", professor: "Conceição", dia: "Quinta-feira", horario: "08h00" },
-    { id: 275, termo: "Termo 6", codigo: "5850", nome: "Laboratório de Bioquímica Analítica", turma: "I", professor: "Conceição", dia: "Quinta-feira", horario: "10h00" },
-
-    { id: 276, termo: "Termo 6", codigo: "5852", nome: "Laboratório de Engenharia Bioquímica", turma: "I", professor: "Elisabeth", dia: "Segunda-feira", horario: "08h00" },
-    { id: 277, termo: "Termo 6", codigo: "5852", nome: "Laboratório de Engenharia Bioquímica", turma: "I", professor: "Elisabeth", dia: "Segunda-feira", horario: "10h00" },
-
-    // TERMO 8
-    { id: 278, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Terça-feira", horario: "08h00" },
-    { id: 279, termo: "Termo 8", codigo: "6928", nome: "Metalurgia Mecânica", turma: "I", professor: "Danieli", dia: "Terça-feira", horario: "10h00" },
-
-    { id: 280, termo: "Termo 8", codigo: "9800", nome: "Tratamentos Térmicos", turma: "I", professor: "Capella", dia: "Segunda-feira", horario: "13h30" },
-    { id: 281, termo: "Termo 8", codigo: "9800", nome: "Tratamentos Térmicos", turma: "I", professor: "Capella", dia: "Segunda-feira", horario: "15h30" },
-
-    { id: 282, termo: "Termo 8", codigo: "5785", nome: "Reologia", turma: "I", professor: "Lilia", dia: "Quinta-feira", horario: "13h30" },
-
-    { id: 283, termo: "Termo 8", codigo: "9801", nome: "Processamento de Termorrigidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
-
-    { id: 284, termo: "Termo 8", codigo: "5873", nome: "Processamento de Materiais Cerâmicos", turma: "I", professor: "Leonardo", dia: "Quarta-feira", horario: "13h30" },
-    { id: 285, termo: "Termo 8", codigo: "5873", nome: "Processamento de Materiais Cerâmicos", turma: "I", professor: "Leonardo", dia: "Quarta-feira", horario: "15h30" },
-
-    { id: 286, termo: "Termo 8", codigo: "5875", nome: "Cerâmicas Refratárias", turma: "I", professor: "Albers", dia: "Sexta-feira", horario: "10h00" },
-
-    { id: 287, termo: "Termo 8", codigo: "6085", nome: "Introdução à Geometria Diferencial", turma: "I", professor: "Patricia", dia: "Segunda-feira", horario: "13h30" },
-    { id: 288, termo: "Termo 8", codigo: "6085", nome: "Introdução à Geometria Diferencial", turma: "I", professor: "Patricia", dia: "Quarta-feira", horario: "13h30" },
-
-    { id: 289, termo: "Termo 8", codigo: "6104", nome: "Métodos Numéricos para Eq. Diferenciais", turma: "I", professor: "Thadeu", dia: "Terça-feira", horario: "15h30" },
-    { id: 290, termo: "Termo 8", codigo: "6104", nome: "Métodos Numéricos para Eq. Diferenciais", turma: "I", professor: "Thadeu", dia: "Sexta-feira", horario: "15h30" },
-
-    { id: 291, termo: "Termo 8", codigo: "5102", nome: "Otimização Inteira", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "15h30" },
-    { id: 292, termo: "Termo 8", codigo: "5102", nome: "Otimização Inteira", turma: "I", professor: "Horácio", dia: "Sexta-feira", horario: "15h30" },
-
-    { id: 293, termo: "Termo 8", codigo: "8288", nome: "Segurança da Informação", turma: "I", professor: "Cappabianco", dia: "Sexta-feira", horario: "15h30" },
-
-    { id: 294, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
-    { id: 295, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Quarta-feira", horario: "15h30" },
-    { id: 296, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Segunda-feira", horario: "19h00" },
-    { id: 297, termo: "Termo 8", codigo: "6102", nome: "Lab. de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 298, termo: "Termo 8", codigo: "5933", nome: "Biossensores", turma: "I", professor: "Marli", dia: "Terça-feira", horario: "13h30" },
-    { id: 299, termo: "Termo 8", codigo: "5933", nome: "Biossensores", turma: "I", professor: "Marli", dia: "Quinta-feira", horario: "13h30" },
-
-    { id: 300, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "13h30" },
-    { id: 450, termo: "Termo 8", codigo: "6107", nome: "Engenharia Clínica Hospitalar Aplicada", turma: "I", professor: "Matheus", dia: "Sexta-feira", horario: "15h30" },
-
-    { id: 301, termo: "Termo 8", codigo: "9794", nome: "Fundamentos de Administração", turma: "I", professor: "Iraci", dia: "Quarta-feira", horario: "10h00" },
-
-    { id: 303, termo: "Termo 8", codigo: "8273", nome: "Instrumentos Biomédicos", turma: "I", professor: "Saraiva", dia: "Terça-feira", horario: "15h30" },
-    { id: 304, termo: "Termo 8", codigo: "8273", nome: "Instrumentos Biomédicos", turma: "I", professor: "Saraiva", dia: "Quinta-feira", horario: "15h30" },
-
-    { id: 305, termo: "Termo 8", codigo: "6033", nome: "Sistemas Embarcados", turma: "I", professor: "Fernanda", dia: "Segunda-feira", horario: "13h30" },
-    { id: 306, termo: "Termo 8", codigo: "6033", nome: "Sistemas Embarcados", turma: "I", professor: "Fernanda", dia: "Quarta-feira", horario: "13h30" },
-    { id: 307, termo: "Termo 8", codigo: "6033", nome: "Sistemas Embarcados", turma: "N", professor: "Aoki", dia: "Terça-feira", horario: "19h00" },
-    { id: 308, termo: "Termo 8", codigo: "6033", nome: "Sistemas Embarcados", turma: "N", professor: "Aoki", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 309, termo: "Termo 8", codigo: "4374", nome: "Metodologia da Pesquisa e Comunicação Científica", turma: "I", professor: "Gurjão", dia: "Segunda-feira", horario: "15h30" },
-
-    // TERMO 10
-    { id: 310, termo: "Termo 10", codigo: "9795", nome: "Projetos em Engenharia Biomédica", turma: "I", professor: "Urban", dia: "Segunda-feira", horario: "13h30" },
-    { id: 311, termo: "Termo 10", codigo: "9795", nome: "Projetos em Engenharia Biomédica", turma: "I", professor: "Urban", dia: "Quarta-feira", horario: "15h30" },
-    { id: 312, termo: "Termo 10", codigo: "9795", nome: "Projetos em Engenharia Biomédica", turma: "N", professor: "Urban", dia: "Segunda-feira", horario: "21h00" },
-    { id: 313, termo: "Termo 10", codigo: "9795", nome: "Projetos em Engenharia Biomédica", turma: "N", professor: "Urban", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 314, termo: "Termo 10", codigo: "6112", nome: "Engenharia Médica Aplicada", turma: "I", professor: "Adenauer", dia: "Segunda-feira", horario: "15h30" },
-    { id: 315, termo: "Termo 10", codigo: "6112", nome: "Engenharia Médica Aplicada", turma: "I", professor: "Adenauer", dia: "Quarta-feira", horario: "15h30" },
-    { id: 316, termo: "Termo 10", codigo: "6112", nome: "Engenharia Médica Aplicada", turma: "N", professor: "Adenauer", dia: "Segunda-feira", horario: "19h00" },
-    { id: 317, termo: "Termo 10", codigo: "6112", nome: "Engenharia Médica Aplicada", turma: "N", professor: "Adenauer", dia: "Quarta-feira", horario: "19h00" },
-
-    // ELETIVAS E REOFERECIMENTOS
-    { id: 318, termo: "Termo 8", codigo: "10517", nome: "Experimentando a Engenharia de Materiais", turma: "I", professor: "Albers", dia: "Sexta-feira", horario: "13h30" },
-    { id: 319, termo: "Termo 8", codigo: "10517", nome: "Experimentando a Engenharia de Materiais", turma: "I", professor: "Albers", dia: "Sexta-feira", horario: "15h30" },
-
-    { id: 320, termo: "Termo 8", codigo: "9689", nome: "Engenharia de Microestrutura de Metais e Ligas", turma: "I", professor: "Kátia", dia: "Segunda-feira", horario: "08h00" },
-    { id: 321, termo: "Termo 8", codigo: "9689", nome: "Engenharia de Microestrutura de Metais e Ligas", turma: "I", professor: "Kátia", dia: "Quarta-feira", horario: "08h00" },
-
-    { id: 322, termo: "Termo 8", codigo: "0001", nome: "Projetos Sustentáveis em Polímeros", turma: "I", professor: "Lemes", dia: "Quinta-feira", horario: "08h00" },
-    { id: 323, termo: "Termo 8", codigo: "0001", nome: "Projetos Sustentáveis em Polímeros", turma: "I", professor: "Lemes", dia: "Quinta-feira", horario: "10h00" },
-
-    { id: 324, termo: "Termo 6", codigo: "5402", nome: "Vidros, Vitrocerâmicos e Vidrados", turma: "N", professor: "Eliandra", dia: "Quinta-feira", horario: "19h00" },
-    { id: 325, termo: "Termo 6", codigo: "5402", nome: "Vidros, Vitrocerâmicos e Vidrados", turma: "N", professor: "Eliandra", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 326, termo: "Termo 6", codigo: "5782", nome: "Tecnologia de Tintas e Vernizes", turma: "N", professor: "Mauricio", dia: "Sexta-feira", horario: "19h00" },
-    { id: 327, termo: "Termo 6", codigo: "5782", nome: "Tecnologia de Tintas e Vernizes", turma: "N", professor: "Mauricio", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 328, termo: "Termo 6", codigo: "5859", nome: "Botânica e Fisiologia Vegetal", turma: "I", professor: "Michael", dia: "Segunda-feira", horario: "13h30" },
-    { id: 329, termo: "Termo 6", codigo: "5859", nome: "Botânica e Fisiologia Vegetal", turma: "I", professor: "Michael", dia: "Quarta-feira", horario: "13h30" },
-
-    { id: 330, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Sexta-feira", horario: "19h00" },
-    { id: 331, termo: "Termo 6", codigo: "5858", nome: "Biotecnologia Animal", turma: "N", professor: "Loures", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 332, termo: "Termo 6", codigo: "5063", nome: "Biotecnologia de Energias Renováveis II", turma: "N", professor: "Danielle", dia: "Terça-feira", horario: "21h00" },
-    { id: 333, termo: "Termo 6", codigo: "5063", nome: "Biotecnologia de Energias Renováveis II", turma: "N", professor: "Danielle", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 334, termo: "Termo 8", codigo: "5864", nome: "Imunologia Aplicada", turma: "N", professor: "Loures", dia: "Segunda-feira", horario: "19h00" },
-    { id: 335, termo: "Termo 8", codigo: "5864", nome: "Imunologia Aplicada", turma: "N", professor: "Loures", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 336, termo: "Termo 8", codigo: "5869", nome: "Ecologia Avançada", turma: "I", professor: "Amado", dia: "Segunda-feira", horario: "15h30" },
-    { id: 337, termo: "Termo 8", codigo: "5869", nome: "Ecologia Avançada", turma: "I", professor: "Amado", dia: "Quarta-feira", horario: "15h30" },
-
-    { id: 338, termo: "Termo 4", codigo: "0003", nome: "Introdução à Nanotecnologia", turma: "I", professor: "Elias", dia: "Quinta-feira", horario: "15h30" },
-    { id: 339, termo: "Termo 4", codigo: "0003", nome: "Introdução à Nanotecnologia", turma: "N", professor: "Elias", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 340, termo: "Termo 4", codigo: "0005", nome: "Mudança do Clima e Sociedade", turma: "I", professor: "Amado", dia: "Segunda-feira", horario: "13h30" },
-    { id: 341, termo: "Termo 4", codigo: "0005", nome: "Mudança do Clima e Sociedade", turma: "N", professor: "Amado", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 342, termo: "Termo 6", codigo: "0007", nome: "Química Analítica", turma: "I", professor: "Elias", dia: "Quarta-feira", horario: "13h30" },
-    { id: 343, termo: "Termo 6", codigo: "0007", nome: "Química Analítica", turma: "I", professor: "Elias", dia: "Quarta-feira", horario: "15h30" },
-
-    { id: 344, termo: "Termo 6", codigo: "0009", nome: "Química Orgânica Experimental", turma: "N", professor: "João", dia: "Quarta-feira", horario: "19h00" },
-    { id: 345, termo: "Termo 6", codigo: "0009", nome: "Química Orgânica Experimental", turma: "N", professor: "João", dia: "Quarta-feira", horario: "21h00" },
-
-    { id: 346, termo: "Termo 4", codigo: "0011", nome: "Práticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "13h30" },
-    { id: 347, termo: "Termo 4", codigo: "0011", nome: "Práticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "15h30" },
-    { id: 348, termo: "Termo 4", codigo: "0011", nome: "Práticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "19h00" },
-    { id: 349, termo: "Termo 4", codigo: "0011", nome: "Práticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 350, termo: "Termo 4", codigo: "0015", nome: "Introdução aos PEPICTS II", turma: "I", professor: "Edson", dia: "Sexta-feira", horario: "15h30" },
-    { id: 351, termo: "Termo 4", codigo: "0015", nome: "Introdução aos PEPICTS II", turma: "N", professor: "Edson", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 352, termo: "Termo 6", codigo: "5095", nome: "Análise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
-    { id: 353, termo: "Termo 6", codigo: "5095", nome: "Análise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Quinta-feira", horario: "13h30" },
-    { id: 354, termo: "Termo 6", codigo: "5095", nome: "Análise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
-    { id: 355, termo: "Termo 6", codigo: "5095", nome: "Análise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 356, termo: "Termo 6", codigo: "5886", nome: "Gestão de projetos", turma: "I", professor: "Iraci", dia: "Quarta-feira", horario: "13h30" },
-
-    { id: 357, termo: "Termo 5", codigo: "0017", nome: "Farmacologia Molecular", turma: "I", professor: "Flavio", dia: "Segunda-feira", horario: "15h30" },
-    { id: 358, termo: "Termo 5", codigo: "0017", nome: "Farmacologia Molecular", turma: "I", professor: "Flavio", dia: "Quarta-feira", horario: "15h30" },
-
-    { id: 359, termo: "Termo 5", codigo: "0019", nome: "Aplicações de Redes Neurais de Aprendizado Profundo", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "19h00" },
-    { id: 360, termo: "Termo 5", codigo: "0019", nome: "Aplicações de Redes Neurais de Aprendizado Profundo", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 361, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "I", professor: "Evandro", dia: "Sexta-feira", horario: "15h30" },
-    { id: 362, termo: "Termo 4", codigo: "0021", nome: "TECNOLOGIA SOCIAL: PRÁXIS E CONTRA-HEGEMONIA", turma: "N", professor: "Evandro", dia: "Terça-feira", horario: "19h00" },
-
-    { id: 363, termo: "Termo 4", codigo: "0023", nome: "Cultura dos Jogos Digitais", turma: "I", professor: "Pereira", dia: "Sexta-feira", horario: "13h30" },
-    { id: 364, termo: "Termo 4", codigo: "8536", nome: "Desenvolvimento de Games", turma: "N", professor: "Cappabianco", dia: "Terça-feira", horario: "21h00" },
-    { id: 365, termo: "Termo 4", codigo: "0024", nome: "Cultura dos Jogos Digitais (Noturno)", turma: "N", professor: "Pereira", dia: "Sexta-feira", horario: "19h00" },
-
-    { id: 366, termo: "Termo 4", codigo: "4352", nome: "Modelagem Computacional", turma: "I", professor: "Lobosco", dia: "Segunda-feira", horario: "15h30" },
-    { id: 367, termo: "Termo 4", codigo: "4352", nome: "Modelagem Computacional", turma: "N", professor: "Lobosco", dia: "Segunda-feira", horario: "21h00" },
-
-    { id: 368, termo: "Termo 8", codigo: "0025", nome: "Introdução à Pesquisa Operacional", turma: "I", professor: "Chaves", dia: "Segunda-feira", horario: "19h00" },
-    { id: 369, termo: "Termo 8", codigo: "0025", nome: "Introdução à Pesquisa Operacional", turma: "I", professor: "Chaves", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 372, termo: "Termo 8", codigo: "0029", nome: "Competições em Ciências de Dados", turma: "I", professor: "Marcio", dia: "Terça-feira", horario: "10h00" },
-    { id: 373, termo: "Termo 8", codigo: "0029", nome: "Competições em Ciências de Dados", turma: "I", professor: "Marcio", dia: "Quinta-feira", horario: "10h00" },
-
-    { id: 374, termo: "Termo 8", codigo: "0031", nome: "Introdução à Redes Neurais Artificiais", turma: "I", professor: "Quiles", dia: "Segunda-feira", horario: "13h30" },
-    { id: 375, termo: "Termo 8", codigo: "0031", nome: "Introdução à Redes Neurais Artificiais", turma: "I", professor: "Quiles", dia: "Quarta-feira", horario: "13h30" },
-
-    { id: 376, termo: "Termo 6", codigo: "0033", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "I", professor: "Sílvia", dia: "Quinta-feira", horario: "13h30" },
-    { id: 377, termo: "Termo 6", codigo: "0034", nome: "Tópicos Interdisciplinares em Computação VII (Acessibilidade Digital)", turma: "N", professor: "Sílvia", dia: "Quinta-feira", horario: "19h00" },
-
-    { id: 378, termo: "Termo 6", codigo: "0035", nome: "RPVMM II", turma: "N", professor: "Leduino", dia: "Terça-feira", horario: "19h00" },
-    { id: 379, termo: "Termo 6", codigo: "0035", nome: "RPVMM II", turma: "N", professor: "Leduino", dia: "Sexta-feira", horario: "21h00" },
-
-    { id: 380, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Segunda-feira", horario: "10h00" },
-    { id: 381, termo: "Termo 6", codigo: "0037", nome: "RPVMM II", turma: "I", professor: "Horácio", dia: "Quarta-feira", horario: "10h00" },
-
-    { id: 382, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "I", professor: "Gabriel", dia: "Segunda-feira", horario: "13h30" },
-    { id: 383, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "I", professor: "Gabriel", dia: "Quarta-feira", horario: "13h30" },
-    { id: 384, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "19h00" },
-    { id: 385, termo: "Termo 6", codigo: "9881", nome: "Internet das Coisas", turma: "N", professor: "Gabriel", dia: "Quinta-feira", horario: "19h00" },
-
-    // REOFERECIMENTOS ADICIONAIS
-    { id: 386, termo: "Termo 9", codigo: "5879", nome: "Reof - Processamento de Termoplásticos", turma: "I", professor: "Passador", dia: "Terça-feira", horario: "13h30" },
-    { id: 387, termo: "Termo 9", codigo: "5879", nome: "Reof - Processamento de Termoplásticos", turma: "I", professor: "Passador", dia: "Terça-feira", horario: "15h30" },
-
-    { id: 388, termo: "Termo 5", codigo: "6674", nome: "Reciclagem de Materiais (Reof)", turma: "N", professor: "Lilia", dia: "Terça-feira", horario: "10h00" },
-
-    { id: 389, termo: "Termo 1", codigo: "0050", nome: "Química Geral", turma: "I", professor: "Raquel", dia: "Segunda-feira", horario: "08h00" },
-    { id: 390, termo: "Termo 1", codigo: "0050", nome: "Química Geral", turma: "I", professor: "Raquel", dia: "Quarta-feira", horario: "08h00" },
-
-    { id: 391, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Terça-feira", horario: "15h30" },
-    { id: 392, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "I", professor: "Didier", dia: "Quinta-feira", horario: "15h30" },
-    { id: 393, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Terça-feira", horario: "21h00" },
-    { id: 394, termo: "Termo 1", codigo: "9394", nome: "Lógica de Programação", turma: "N", professor: "Didier", dia: "Quinta-feira", horario: "21h00" },
-
-    { id: 395, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Segunda-feira", horario: "15h30" },
-    { id: 396, termo: "Termo 4", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "I", professor: "Berton", dia: "Quarta-feira", horario: "15h30" },
-    { id: 397, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "N", professor: "Berton", dia: "Segunda-feira", horario: "19h00" },
-    { id: 398, termo: "Termo 3", codigo: "2833", nome: "Algoritmos e Estruturas de Dados II", turma: "N", professor: "Berton", dia: "Quarta-feira", horario: "19h00" },
-
-    { id: 399, termo: "Termo 5", codigo: "2975", nome: "Teoria de Grafos", turma: "I", professor: "Luis", dia: "Segunda-feira", horario: "15h30" },
-    { id: 400, termo: "Termo 5", codigo: "2975", nome: "Teoria de Grafos", turma: "I", professor: "Luis", dia: "Quarta-feira", horario: "15h30" },
-
-    { id: 401, termo: "Termo 1", codigo: "5703", nome: "Fundamentos de Biologia Moderna", turma: "IA", professor: "Villaverde", dia: "Terça-feira", horario: "08h00" },
-    { id: 402, termo: "Termo 1", codigo: "5703", nome: "Fundamentos de Biologia Moderna", turma: "IA", professor: "Villaverde", dia: "Quinta-feira", horario: "08h00" },
-    { id: 403, termo: "Termo 1", codigo: "5703", nome: "Fundamentos de Biologia Moderna", turma: "IB", professor: "Villaverde", dia: "Terça-feira", horario: "13h30" },
-    { id: 404, termo: "Termo 1", codigo: "5703", nome: "Fundamentos de Biologia Moderna", turma: "IB", professor: "Villaverde", dia: "Quinta-feira", horario: "13h30" },
-
-    { id: 405, termo: "Termo 9", codigo: "6106", nome: "TCC-I-EC", turma: "I", professor: "Marcorin", dia: "Sexta-feira", horario: "19h00" },
-
-    //ITENS ADICIONADOS MANUALMENTE CONFORME GRADE HORARIA EM 13/07 12H18 AM
-
-    { id: 406, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "I", professor: "Gabriel", dia: "Terça-feira", horario: "15h30" },
-    { id: 407, termo: "Termo 8", codigo: "0055", nome: "Laboratório de Circuitos Elétricos", turma: "N", professor: "Gabriel", dia: "Terça-feira", horario: "21h00" },
-    { id: 411, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Segunda-feira", horario: "19h00" },
-    { id: 412, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "N", professor: "Tiago", dia: "Quarta-feira", horario: "19h00" },
-    { id: 413, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Segunda-feira", horario: "15h30" },
-    { id: 414, termo: "Termo 8", codigo: "9999", nome: "Lab.de Sistemas Computacionais: SO", turma: "I", professor: "Tiago", dia: "Quarta-feira", horario: "15h30" }, 
-    { id: 419, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "I", professor: "Fabiano", dia: "Quinta-feira", horario: "15h30" },
-    { id: 420, termo: "Termo 4", codigo: "9997", nome: "Fenômenos do Contínuo Experimental", turma: "N", professor: "Fabiano", dia: "Segunda-feira", horario: "19h00" },
-    { id: 421, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Segunda-feira", horario: "13h30" },
-    { id: 422, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "I", professor: "Karen", dia: "Quarta-feira", horario: "13h30" },
-    { id: 423, termo: "Termo 8", codigo: "0027", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Segunda-feira", horario: "08h00" },
-    { id: 424, termo: "Termo 8", codigo: "0027", nome: "Tópicos Interdisciplinares em Computação V (Neurociência Computacional) ", turma: "I", professor: "Elbert", dia: "Quarta-feira", horario: "08h00" },
-    { id: 429, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Segunda-feira", horario: "19h00" },
-    { id: 430, termo: "Termo 6", codigo: "9996", nome: "Equações Diferenciais Ordinárias", turma: "N", professor: "Cláudia Aline", dia: "Quarta-feira", horario: "19h00" },
-    { id: 431, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Segunda-feira", horario: "08h00" },
-    { id: 432, termo: "Termo 6", codigo: "9993", nome: "Tecnologia de Tintas e Vernizes", turma: "I", professor: "Maurício", dia: "Quarta-feira", horario: "10h00" },
-    { id: 433, termo: "Termo 6", codigo: "9992", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "I", professor: "Silva", dia: "Quarta-feira", horario: "15h30" },
-    { id: 434, termo: "Termo 6", codigo: "9992", nome: "Laboratório de Sistemas computacionais - Eng.de Sistemas", turma: "N", professor: "Silva", dia: "Quarta-feira", horario: "19h00" },
-    { id: 435, termo: "Termo 4", codigo: "9991", nome: "Praticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "13h30" },
-    { id: 436, termo: "Termo 4", codigo: "9991", nome: "Praticas em Projetos Extensionistas II", turma: "I", professor: "Marli", dia: "Sexta-feira", horario: "15h30" },
-    { id: 436, termo: "Termo 4", codigo: "9990", nome: "Iniciação aos PEPICTs II", turma: "I", professor: "Edson", dia: "Sexta-feira", horario: "15h30" },
-    { id: 437, termo: "Termo 4", codigo: "4375", nome: "Lab. Biologia Molecular e Celular", turma: "N", professor: "Claudia", dia: "Sexta-feira", horario: "21h00" },
-    { id: 438, termo: "Termo 4", codigo: "9989", nome: "Praticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "19h00" },
-    { id: 439, termo: "Termo 4", codigo: "9988", nome: "Praticas em Projetos Extensionistas II", turma: "N", professor: "Marli", dia: "Sexta-feira", horario: "21h00" },
-    { id: 440, termo: "Termo 6", codigo: "9987", nome: "Aplicações de Redes Neurais de Aprendizado Profundo em Sinais e Imagens Médicas", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "19h00" },
-    { id: 441, termo: "Termo 6", codigo: "9986", nome: "Aplicações de Redes Neurais de Aprendizado Profundo em Sinais e Imagens Médicas", turma: "N", professor: "Matheus", dia: "Sexta-feira", horario: "21h00" },
-    { id: 442, termo: "Termo 4", codigo: "9985", nome: "Iniciação aos PEPICTs II", turma: "N", professor: "Edson", dia: "Sexta-feira", horario: "19h00" },
-    { id: 443, termo: "Termo 4", codigo: "8536", nome: "Desenvolvimento de Games", turma: "N", professor: "Pereira", dia: "Sexta-feira", horario: "19h00" },
-    { id: 444, termo: "Termo 8", codigo: "9983", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "N", professor: "Márcio", dia: "Terça-feira", horario: "10h00" },
-    { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
-    { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
-    { id: 445, termo: "Termo 6", codigo: "9984", nome: "Analise de Investimentos e Riscos", turma: "I", professor: "Sato", dia: "Terça-feira", horario: "13h30" },
-    { id: 446, termo: "Termo 6", codigo: "9980", nome: "Analise de Investimentos e Riscos", turma: "N", professor: "Sato", dia: "Terça-feira", horario: "19h00" },
-    { id: 447, termo: "Termo 8", codigo: "9982", nome: "Processamento de Termorrígidos e Elastômeros", turma: "I", professor: "Passador", dia: "Quinta-feira", horario: "15h30" },
-    { id: 448, termo: "Termo 8", codigo: "9981", nome: "Tópicos Interdisciplinas em Computação VI (Competições em Ciências de Dados) ", turma: "I", professor: "Márcio", dia: "Quinta-feira", horario: "10h00" }
 ];
 
-// Onde salvamos as escolhas do usuário usando apenas o ID único da matéria
+// Função para adaptar os dias da semana
+const formatarDia = (diaOriginal) => {
+    const diasMap = {
+        "segunda": "Segunda-feira",
+        "terça": "Terça-feira",
+        "quarta": "Quarta-feira",
+        "quinta": "Quinta-feira",
+        "sexta": "Sexta-feira"
+    };
+    const diaLimpo = diaOriginal.toLowerCase().split('-')[0].trim();
+    return diasMap[diaLimpo] || diaOriginal;
+};
+
+const materiasOfertadas = [];
+
+// Adapta o JSON para o formato lido pela interface
+novaBaseJson.forEach(item => {
+    item.days.forEach((dia, index) => {
+        const horarioStart = item.hours[index].split(' - ')[0].trim();
+        
+        // Verificação de segurança para o código da matéria
+        const codigoSeguro = item.code ? item.code.toString() : "S/N";
+        
+        materiasOfertadas.push({
+            id: parseInt(`${item.id}${index}`), 
+            termo: `Termo ${item.term}`,
+            codigo: codigoSeguro,
+            nome: item.name,
+            turma: item.class,
+            professor: item.teacher,
+            dia: formatarDia(dia),
+            horario: horarioStart
+        });
+    });
+});
+
 let gradeSalvaIds = JSON.parse(localStorage.getItem('minhaGradeIds_2026')) || [];
-// Onde salvamos as pequenas anotações (salas) de cada matéria
 let notasSalvas = JSON.parse(localStorage.getItem('minhasNotas_2026')) || {};
 
 // ==========================================================
@@ -618,20 +4553,16 @@ function desenharGrade() {
 
     let html = `<div class="grid grid-cols-6 border border-gray-300 rounded shadow-sm bg-white overflow-hidden">`;
     
-    // Topo cinza com os dias da semana
     html += `<div class="bg-gray-200 p-3 border border-gray-300 flex items-center justify-center font-bold text-xs text-gray-600">Horário</div>`;
     diasSemana.forEach(dia => {
         html += `<div class="bg-gray-200 p-3 border border-gray-300 font-bold text-center text-xs text-gray-700">${dia}</div>`;
     });
     
-    // Linhas de Horários e Células
     horarios.forEach(horario => {
-        // Coluna Lateral de Horário
         html += `<div class="bg-gray-100 p-2 font-bold text-center flex flex-col items-center justify-center border border-gray-300 text-xs text-gray-600 h-24">
                     <span>${horario}</span>
                  </div>`;
         
-        // Células dos dias
         diasSemana.forEach(dia => {
             const materiaNaCelula = materiasOfertadas.find(m => 
                 gradeSalvaIds.includes(m.id) && m.dia === dia && m.horario === horario
@@ -641,13 +4572,10 @@ function desenharGrade() {
             let estiloDesign = "bg-white hover:bg-blue-50/40 cursor-pointer";
             
             if (materiaNaCelula) {
-                // Caixinha padrão da matéria selecionada
                 estiloDesign = `cursor-pointer border-2 transition-all shadow-sm relative`;
                 
-            // Pega a nota salva para esta matéria, se houver
                 const notaAtual = notasSalvas[materiaNaCelula.id] || "";
                 
-                // Se tem nota, mostra APENAS o texto (sem o quadro branco e com fonte mais fina). Se não tem, mostra "Adicionar nota".
                 const htmlNota = notaAtual 
                     ? `<div onclick="editarNota(event, ${materiaNaCelula.id})" class="text-[10.5px] text-gray-900 mt-1 font-medium hover:underline break-words">📌 ${notaAtual}</div>` 
                     : `<div onclick="editarNota(event, ${materiaNaCelula.id})" class="text-[9px] text-gray-500 mt-1 hover:text-gray-900 underline font-medium transition-colors">Adicionar nota</div>`;
@@ -674,7 +4602,6 @@ function desenharGrade() {
                 }
             }
             
-            // Se houver uma matéria na célula, ela pega a cor HSL única. Se não, fica vazia.
             const atributoStyleColor = materiaNaCelula ? obterCorMateria(materiaNaCelula.codigo) : "";
 
             html += `
@@ -699,7 +4626,7 @@ function desenharGrade() {
 let diaAtualSelecionado = "";
 let horarioAtualSelecionado = "";
 
-function celulaClicada(dia, horario) {
+window.celulaClicada = function(dia, horario) {
     diaAtualSelecionado = dia;
     horarioAtualSelecionado = horario;
     
@@ -764,7 +4691,7 @@ function celulaClicada(dia, horario) {
 // ==========================================================
 // 5. INCLUSÃO, REMOÇÃO E TRATAMENTO DE CONFLITOS DE HORÁRIO
 // ==========================================================
-function alternarMateria(materia) {
+window.alternarMateria = function(materia) {
     const todasInstanciasDaTurma = materiasOfertadas.filter(m => 
         m.codigo === materia.codigo && m.turma === materia.turma
     );
@@ -803,7 +4730,7 @@ function alternarMateria(materia) {
     desenharGrade();
 }
 
-function removerMateriaPorId(id) {
+window.removerMateriaPorId = function(id) {
     const materia = materiasOfertadas.find(m => m.id === id);
     if (materia) {
         const todasInstancias = materiasOfertadas.filter(m => m.codigo === materia.codigo && m.turma === materia.turma);
@@ -816,7 +4743,7 @@ function removerMateriaPorId(id) {
     desenharGrade();
 }
 
-function limparTodaGrade() {
+window.limparTodaGrade = function() {
     if (confirm("Tem certeza que deseja apagar todas as matérias selecionadas da sua grade?")) {
         gradeSalvaIds = [];
         localStorage.setItem('minhaGradeIds_2026', JSON.stringify(gradeSalvaIds));
@@ -824,7 +4751,7 @@ function limparTodaGrade() {
     }
 }
 
-function fecharModal() {
+window.fecharModal = function() {
     document.getElementById('modal').classList.add('hidden');
 }
 
@@ -835,15 +4762,17 @@ function contabilizarAcessoPlataforma() {
     fetch("https://count.co/hit/grade-faculdade-milo/acessos-globais")
         .then(response => response.json())
         .then(data => {
-            document.getElementById('contador-global').innerText = data.hits;
+            const contador = document.getElementById('contador-global');
+            if(contador) contador.innerText = data.hits;
         })
         .catch(error => {
             console.error("Erro ao conectar no contador:", error);
-            document.getElementById('contador-global').innerText = "1";
+            const contador = document.getElementById('contador-global');
+            if(contador) contador.innerText = "1";
         });
 }
 
-function baixarGradeImagem() {
+window.baixarGradeImagem = function() {
     const container = document.getElementById('grade-container');
     const clone = container.cloneNode(true);
     
@@ -885,7 +4814,6 @@ function baixarGradeImagem() {
             spanBotao.style.display = 'none';
         }
         
-        // Esconde o botão "Adicionar nota" na foto, se ele não tiver sido preenchido
         const btnAddNota = celula.querySelector('div[onclick^="editarNota"]');
         if (btnAddNota && btnAddNota.innerText.includes("Adicionar nota")) {
             btnAddNota.style.display = 'none';
@@ -921,21 +4849,19 @@ function baixarGradeImagem() {
 // FUNÇÃO PARA EDITAR ANOTAÇÕES (SALA/LAB)
 // ==========================================================
 window.editarNota = function(event, idMateria) {
-    // Impede que clicar na nota abra também o menu de remover a matéria
     event.stopPropagation(); 
     
     let notaAtual = notasSalvas[idMateria] || "";
     let novaNota = prompt("Anotação para este horário (ex: Sala 302, Lab. Informática):", notaAtual);
     
-    // Se o usuário não clicou em "Cancelar"
     if (novaNota !== null) { 
         if (novaNota.trim() === "") {
-            delete notasSalvas[idMateria]; // Se deixou vazio, apaga a nota
+            delete notasSalvas[idMateria];
         } else {
-            notasSalvas[idMateria] = novaNota.trim().substring(0, 30); // Limita a 30 letras para não estourar o bloco
+            notasSalvas[idMateria] = novaNota.trim().substring(0, 30);
         }
         localStorage.setItem('minhasNotas_2026', JSON.stringify(notasSalvas));
-        desenharGrade(); // Atualiza a caixinha na mesma hora
+        desenharGrade(); 
     }
 };
 
@@ -943,7 +4869,7 @@ window.editarNota = function(event, idMateria) {
 // NEW: NOVA LÓGICA DE PESQUISA POR NOME COM JANELA DE HORÁRIOS
 // ==========================================================
 
-function buscarMateriasGerais() {
+window.buscarMateriasGerais = function() {
     const input = document.getElementById('busca-materia');
     const containerResultados = document.getElementById('resultados-busca');
     const busca = normalizar(input.value.trim());
@@ -960,7 +4886,6 @@ function buscarMateriasGerais() {
     materiasOfertadas.forEach(m => {
         const chaveIdentificacao = `${m.codigo}-${m.nome}-${m.turma}`;
         
-        // Aplica o normalizar() no nome da matéria do BD para comparar com a busca normalizada
         if (!nomesRastreados.has(chaveIdentificacao) && (normalizar(m.nome).includes(busca) || normalizar(m.codigo).includes(busca))) {
             nomesRastreados.add(chaveIdentificacao);
             materiasUnicas.push(m);
@@ -991,7 +4916,7 @@ function buscarMateriasGerais() {
     containerResultados.classList.remove('hidden');
 }
 
-function mostrarHorariosDaMateria(codigo, turma) {
+window.mostrarHorariosDaMateria = function(codigo, turma) {
     const todasInstancias = materiasOfertadas.filter(m => m.codigo === codigo && m.turma === turma);
     if (todasInstancias.length === 0) return;
     
