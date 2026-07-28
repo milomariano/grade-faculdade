@@ -46,7 +46,7 @@ const materiasOfertadas = [
     { id: 3, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "IC", professor: "Evandro", dia: "Sexta-feira", horario: "13h30" },
     { id: 4, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "ID", professor: "Walter", dia: "Terça-feira", horario: "15h30" },
     { id: 5, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "NA", professor: "Walter", dia: "Terça-feira", horario: "19h00" },
-    { id: 6, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "NB", professor: "Evandro", dia: "Segunda-feira", horario: "21h00" },
+    { id: 6, termo: "Termo 2", codigo: "5870", nome: "Ciência, Tecnologia, Sociedade e Ambiente (CTSA)", turma: "NB", professor: "Evandro", dia: "Terça-feira", horario: "21h00" },
     
     { id: 7, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IA", professor: "Thaciana", dia: "Terça-feira", horario: "13h30" },
     { id: 8, termo: "Termo 2", codigo: "4369", nome: "Fenômenos Mecânicos", turma: "IA", professor: "Thaciana", dia: "Quarta-feira", horario: "13h30" },
